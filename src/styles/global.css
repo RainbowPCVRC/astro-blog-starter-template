@@ -652,3 +652,22 @@ a.neon-card:hover { border-bottom: none; }
     color: #000;
     background: #fff;
   }
+
+/* ===== Image Glow Effect ===== */
+.img-btn{
+  display:block;
+  padding:0;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+}
+
+.store-img{
+  position: relative;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 22px rgba(160, 100, 255, 0.20);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.img-btn:hover .store-img{
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.14), 0 0 34px rgba(180, 120, 255, 0.35);
+}
