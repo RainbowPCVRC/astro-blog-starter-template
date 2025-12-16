@@ -1,91 +1,84 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE, LINKS } from "../consts";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={`${SITE_TITLE} • Contacts`} description="How to reach RainbowVis." />
-  </head>
-  <body>
-    <Header />
+<BaseLayout title={`${SITE_TITLE} • Contacts`} description="How to reach RainbowVis.">
+  <main class="page-shell">
+    <header class="page-head neon-card proximity-glow">
+      <div class="glow-spot"></div>
+      <h1>Contacts</h1>
+      <p>Here’s the best ways to reach me.</p>
+    </header>
 
-    <main class="page-shell">
-      <header class="page-head neon-card proximity-glow">
+    <section class="contact-grid" style="margin-top: 1rem;">
+      <a class="neon-card proximity-glow contact-card" href={LINKS.discordInvite} target="_blank" rel="noreferrer">
         <div class="glow-spot"></div>
-        <h1>Contacts</h1>
-        <p>Best ways to reach me.</p>
-      </header>
+        <img class="contact-icon" src="/icons/discord.svg" alt="" />
+        <div><h2>Discord</h2><p>rainbow_vis</p></div>
+      </a>
 
-      <section class="contact-grid" style="margin-top: 1rem;">
-        <article class="neon-card proximity-glow contact-card">
-          <div class="contact-icon" aria-hidden="true">💬</div>
-          <div><h2>Discord</h2><p>rainbow_vis</p></div>
-        </article>
+      <div class="neon-card proximity-glow contact-card">
+        <div class="glow-spot"></div>
+        <img class="contact-icon" src="/icons/about.svg" alt="" />
+        <div><h2>VRChat</h2><p>Rainbow_Vis</p></div>
+      </div>
 
-        <article class="neon-card proximity-glow contact-card">
-          <div class="contact-icon" aria-hidden="true">🕶️</div>
-          <div><h2>VRChat</h2><p>Rainbow_Vis</p></div>
-        </article>
+      <a class="neon-card proximity-glow contact-card" href="mailto:rainbowvis.co@gmail.com">
+        <div class="glow-spot"></div>
+        <img class="contact-icon" src="/icons/social.svg" alt="" />
+        <div><h2>Gmail</h2><p>rainbowvis.co@gmail.com</p></div>
+      </a>
 
-        <article class="neon-card proximity-glow contact-card">
-          <div class="contact-icon" aria-hidden="true">✉️</div>
-          <div><h2>Gmail</h2><p>rainbowvis.co@gmail.com</p></div>
-        </article>
+      <a class="neon-card proximity-glow contact-card" href={LINKS.twitter} target="_blank" rel="noreferrer">
+        <div class="glow-spot"></div>
+        <img class="contact-icon" src="/icons/twitter.svg" alt="" />
+        <div><h2>Twitter / X</h2><p>@RainbowVis</p></div>
+      </a>
 
-        <article class="neon-card proximity-glow contact-card">
-          <div class="contact-icon" aria-hidden="true">𝕏</div>
-          <div><h2>Twitter / X</h2><p>@RainbowVis</p></div>
-        </article>
+      <a class="neon-card proximity-glow contact-card" href={LINKS.bluesky} target="_blank" rel="noreferrer">
+        <div class="glow-spot"></div>
+        <img class="contact-icon" src="/icons/bluesky.svg" alt="" />
+        <div><h2>Bluesky</h2><p>@rainbowvis.bsky.social</p></div>
+      </a>
+    </section>
+  </main>
 
-        <article class="neon-card proximity-glow contact-card">
-          <div class="contact-icon" aria-hidden="true">🦋</div>
-          <div><h2>Bluesky</h2><p>@rainbowvis.bsky.social</p></div>
-        </article>
-      </section>
-    </main>
+  <style>
+    .contact-grid{
+      max-width: 920px;
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 820px){
+      .contact-grid{ grid-template-columns: 1fr; }
+    }
 
-    <Footer />
-    <script src="/proximityGlow.js" defer></script>
+    .contact-card{
+      display:flex;
+      gap: .85rem;
+      align-items:center;
+      text-decoration:none;
+    }
 
-    <style>
-      .contact-grid{
-        display:grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 1rem;
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      .contact-card{
-        display:flex;
-        gap: .85rem;
-        align-items:center;
-      }
-      .contact-card h2{
-        margin: 0;
-        font-size: 1.1rem;
-      }
-      .contact-card p{
-        margin: .15rem 0 0;
-        opacity: .9;
-      }
-      .contact-icon{
-        width: 44px;
-        height: 44px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        border-radius: 14px;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.08);
-        flex: 0 0 auto;
-      }
-      @media (max-width: 820px){
-        .contact-grid{ grid-template-columns: 1fr; }
-      }
-    </style>
-  </body>
-</html>
+    .contact-card h2{
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .contact-card p{
+      margin: .15rem 0 0;
+      opacity: .9;
+    }
+    .contact-icon{
+      width: 44px;
+      height: 44px;
+      padding: .6rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      flex: 0 0 auto;
+    }
+  </style>
+</BaseLayout>
