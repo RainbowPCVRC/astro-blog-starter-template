@@ -85,8 +85,6 @@ export const onRequestPost: PagesFunction<{
   }
 
   // Nice success page
-  return new Response(
-    `Request sent! Thanks — RainbowVis will reply to you at ${replyTo}.`,
-    { status: 200, headers: { "content-type": "text/plain; charset=utf-8" } }
-  );
+  const origin = new URL(request.url).origin;
+    return Response.redirect(`${origin}/commissions/success?next=${encodeURIComponent("/commissions")}`, 303);
 };
