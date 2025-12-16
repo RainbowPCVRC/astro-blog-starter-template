@@ -1,88 +1,86 @@
-export const onRequestGet: PagesFunction = async () => {
-  return new Response(
-    "OK — commission endpoint is live. Submit the form from /commissions (POST) to send an email.",
-    { status: 200, headers: { "content-type": "text/plain; charset=utf-8" } }
-  );
-};
+import { COMMISSION_EMAIL_TO } from "../../consts";
 
-export const onRequestPost: PagesFunction<{
-  R2_UPLOADS: R2Bucket;
-}> = async (context) => {
-  const { request, env } = context;
+function toBase64(bytes: Uint8Array) {
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
 
+export async function POST({ request }: { request: Request }) {
   const form = await request.formData();
 
   const name = String(form.get("name") || "").trim();
   const replyTo = String(form.get("reply_to") || "").trim();
   const commissionType = String(form.get("commission_type") || "").trim();
   const details = String(form.get("details") || "").trim();
-  const next = String(form.get("next") || "/commissions").trim() || "/commissions";
-
-  const files = form.getAll("files").filter((x): x is File => x instanceof File && x.size > 0);
+  const next = String(form.get("next") || "/commissions").trim();
 
   if (!name || !replyTo || !commissionType || !details) {
     return new Response("Missing required fields.", { status: 400 });
   }
 
-  const uploaded: { key: string; name: string; size: number; type: string }[] = [];
-  for (const f of files) {
-    if (f.size > 10 * 1024 * 1024) continue;
+  const files = form.getAll("files").filter((x): x is File => x instanceof File && x.size > 0);
 
-    const safeName = f.name.replace(/[^\w.\-() ]+/g, "_");
-    const key = `commission_uploads/${Date.now()}_${crypto.randomUUID()}_${safeName}`;
+  // Limits (keeps Workers + email sane)
+  const maxFiles = 5;
+  const maxEach = 4 * 1024 * 1024; // 4MB each
+  const safeFiles = files.slice(0, maxFiles).filter((f) => f.size <= maxEach);
 
-    await env.R2_UPLOADS.put(key, await f.arrayBuffer(), {
-      httpMetadata: { contentType: f.type || "application/octet-stream" },
+  const attachments: any[] = [];
+  for (const f of safeFiles) {
+    const buf = new Uint8Array(await f.arrayBuffer());
+    attachments.push({
+      content: toBase64(buf),
+      filename: f.name || "upload",
+      type: f.type || "application/octet-stream",
+      disposition: "attachment",
     });
-
-    uploaded.push({ key, name: f.name, size: f.size, type: f.type || "unknown" });
   }
 
-  const origin = new URL(request.url).origin;
+  const bodyText =
+`New commission request
 
-  const lines: string[] = [];
-  lines.push(`New commission request for RainbowVis`);
-  lines.push(``);
-  lines.push(`Name/Handle: ${name}`);
-  lines.push(`Reply-To: ${replyTo}`);
-  lines.push(`Commission Type: ${commissionType}`);
-  lines.push(``);
-  lines.push(`Details:`);
-  lines.push(details);
-  lines.push(``);
-  lines.push(`Uploads:`);
-  if (uploaded.length === 0) {
-    lines.push(`- None`);
-  } else {
-    for (const u of uploaded) {
-      const link = `${origin}/api/download?key=${encodeURIComponent(u.key)}`;
-      lines.push(`- ${u.name} (${Math.round(u.size / 1024)} KB)`);
-      lines.push(`  ${link}`);
-    }
-  }
+Name: ${name}
+Reply-To: ${replyTo}
+Commission Type: ${commissionType}
 
-  const emailPayload = {
+Details:
+${details}
+
+Files attached: ${attachments.length}/${files.length} (max ${maxFiles}, ${maxEach / (1024*1024)}MB each)
+`;
+
+  // MailChannels (works on Cloudflare Workers)
+  const payload = {
     personalizations: [
       {
-        to: [{ email: "rainbowvis.co@gmail.com", name: "RainbowVis" }],
+        to: [{ email: COMMISSION_EMAIL_TO }],
         reply_to: { email: replyTo, name },
       },
     ],
-    from: { email: "commissions@rainbowvis.space", name: "RainbowVis Site" },
-    subject: `Commission Request: ${commissionType} — ${name}`,
-    content: [{ type: "text/plain", value: lines.join("\n") }],
+    from: {
+      email: "no-reply@rainbowvis.space",
+      name: "Rainbow's Creations",
+    },
+    subject: `Commission Request — ${commissionType} — ${name}`,
+    content: [{ type: "text/plain", value: bodyText }],
+    ...(attachments.length ? { attachments } : {}),
   };
 
-  const resp = await fetch("https://api.mailchannels.net/tx/v1/send", {
+  const res = await fetch("https://api.mailchannels.net/tx/v1/send", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify(emailPayload),
+    body: JSON.stringify(payload),
   });
 
-  if (!resp.ok) {
-    const errText = await resp.text();
-    return new Response(`Email failed: ${errText}`, { status: 502 });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    return new Response(`Email send failed.\n${text}`, { status: 500 });
   }
 
-  return Response.redirect(`${origin}/commissions/success?next=${encodeURIComponent(next)}`, 303);
-};
+  // Redirect to success page which auto-returns
+  return Response.redirect(`/commissions/success?next=${encodeURIComponent(next)}`, 303);
+}
