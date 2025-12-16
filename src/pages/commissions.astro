@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Commissions">
+  <section class="page">
+    <h1>Commissions</h1>
+
+    <p>
+      Custom artwork, avatars, mods, and assets.
+    </p>
+
+    <form
+      action="https://formspree.io/f/YOUR_FORM_ID"
+      method="POST"
+      class="commission-form"
+    >
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="details" placeholder="What are you looking for?" required></textarea>
+
+      <button type="submit">Send Request</button>
+    </form>
+  </section>
+</BaseLayout>
