@@ -1,15 +1,175 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const gumroad = "https://rainbowscreations.gumroad.com/";
+const jinxxy = "https://jinxxy.com/rainbowvis";
+const kofi = "https://ko-fi.com/rainbow_vis";
 ---
 
-<BaseLayout title="Products">
-  <section class="page">
-    <h1>Products</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${SITE_TITLE} • Products`} description="Store links + featured products." />
+  </head>
+  <body>
+    <Header />
 
-    <div class="links">
-      <a href="https://gumroad.com" target="_blank">Gumroad</a>
-      <a href="https://jinxxy.com" target="_blank">Jinxxy</a>
-      <a href="https://ko-fi.com" target="_blank">Ko-fi</a>
-    </div>
-  </section>
-</BaseLayout>
+    <main class="page-shell">
+      <header class="page-head neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1>Products</h1>
+        <p>
+          <span class="underline-soft">If you want quality products for a decent price, then go to my </span>
+          <a class="underline-soft" href={gumroad} target="_blank" rel="noreferrer">Gumroad</a>
+          <span class="underline-soft"> &amp; </span>
+          <a class="underline-soft" href={jinxxy} target="_blank" rel="noreferrer">Jinxxy</a>
+          <span class="underline-soft"> Links!</span>
+        </p>
+      </header>
+
+      <!-- Two store boxes centered, with & between -->
+      <section class="store-row">
+        <article class="neon-card proximity-glow store-card store-left">
+          <div class="glow-spot"></div>
+
+          <div class="store-head">
+            <span class="store-icon" aria-hidden="true">
+              <!-- Gumroad-ish bag icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 7.5A4.5 4.5 0 0 1 11.5 3h1A4.5 4.5 0 0 1 17 7.5v1A4.5 4.5 0 0 1 12.5 13h-1A4.5 4.5 0 0 1 7 8.5v-1Z" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M6 21h12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M9 21v-3.2c0-1 .8-1.8 1.8-1.8h2.4c1 0 1.8.8 1.8 1.8V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <h2 class="store-title">Gumroad Store Link</h2>
+              <a class="store-cta" href={gumroad} target="_blank" rel="noreferrer">
+                Go to Store Page! <span class="arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="store-desc">
+            Featured: Lumistera Leg Warmers (example image)
+          </p>
+
+          <!-- Clickable image with modal -->
+          <button class="img-btn" type="button" data-open="gumroadModal" aria-label="Open Gumroad product image">
+            <img
+              class="store-img"
+              src="/images/products/lumistera-leg-warmers.png"
+              alt="Lumistera Leg Warmers product preview"
+              loading="lazy"
+            />
+          </button>
+        </article>
+
+        <div class="store-amp">&amp;</div>
+
+        <article class="neon-card proximity-glow store-card store-right">
+          <div class="glow-spot"></div>
+
+          <div class="store-head">
+            <span class="store-icon" aria-hidden="true">
+              <!-- Jinxxy-ish cube icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                <path d="M12 7v10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M7.5 10.2L12 12.5l4.5-2.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <h2 class="store-title">Jinxxy Store Link</h2>
+              <a class="store-cta" href={jinxxy} target="_blank" rel="noreferrer">
+                Go to Store Page! <span class="arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="store-desc">
+            Featured: Add your showcase image here (example)
+          </p>
+
+          <button class="img-btn" type="button" data-open="jinxxyModal" aria-label="Open Jinxxy product image">
+            <img
+              class="store-img"
+              src="/images/products/jinxxy-feature.png"
+              alt="Jinxxy product preview"
+              loading="lazy"
+            />
+          </button>
+        </article>
+      </section>
+
+      <!-- Ko-fi support box bottom centered -->
+      <section class="kofi-wrap">
+        <article class="neon-card proximity-glow kofi-card">
+          <div class="glow-spot"></div>
+
+          <div class="kofi-head">
+            <div>
+              <h2>Support on Ko-fi</h2>
+              <p class="kofi-desc">
+                If you want to support and make RainbowVis&apos;s dreams come true, then consider supporting them on their Ko-Fi!
+                There is memberships affordable for everyone! And the benefits are very great!
+              </p>
+
+              <a class="store-cta" href={kofi} target="_blank" rel="noreferrer">
+                Go support RainbowVis if you want! <span class="arrow">→</span>
+              </a>
+            </div>
+
+            <span class="store-icon kofi-icon" aria-hidden="true">
+              <!-- Mug icon -->
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 7h10v10a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V7Z" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M16 9h1.2A2.8 2.8 0 0 1 20 11.8v.4A2.8 2.8 0 0 1 17.2 15H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                <path d="M9 6V4h4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <!-- Modals -->
+      <dialog class="img-modal" id="gumroadModal">
+        <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+        <img src="/images/products/lumistera-leg-warmers.png" alt="Lumistera Leg Warmers product preview (large)" />
+      </dialog>
+
+      <dialog class="img-modal" id="jinxxyModal">
+        <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+        <img src="/images/products/jinxxy-feature.png" alt="Jinxxy product preview (large)" />
+      </dialog>
+
+    </main>
+
+    <Footer />
+    <script src="/proximityGlow.js" defer></script>
+
+    <script>
+      // Simple modal handling
+      document.addEventListener('click', (e) => {
+        const openBtn = e.target.closest('[data-open]');
+        if (openBtn) {
+          const id = openBtn.getAttribute('data-open');
+          const dlg = document.getElementById(id);
+          if (dlg && dlg.showModal) dlg.showModal();
+        }
+
+        if (e.target.matches('[data-close]')) {
+          const dlg = e.target.closest('dialog');
+          if (dlg) dlg.close();
+        }
+
+        // click outside image closes
+        if (e.target instanceof HTMLDialogElement) {
+          e.target.close();
+        }
+      });
+    </script>
+  </body>
+</html>
