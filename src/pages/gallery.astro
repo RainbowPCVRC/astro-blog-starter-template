@@ -1,46 +1,46 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE } from "../consts";
 
 const items = [
-  { title: "Terraria Mod Showcase", tag: "Mods", desc: "Vanity sets, weapons, effects, and previews." },
-  { title: "VRChat Retexture Pack", tag: "VRChat", desc: "Dark neon retextures and variants." },
-  { title: "Icon / Branding Art", tag: "Art", desc: "Terraria-style icons, logos, and graphics." },
-  { title: "3D / Blender Work", tag: "3D", desc: "Renders, podiums, and materials." },
-  { title: "FNF / Audio Work", tag: "Audio", desc: "Chromatics and sound design samples." },
+  { href: "/gallery/terraria", title: "Terraria Mod Showcase", tag: "Mods", desc: "Vanity sets, weapons, effects, and previews." },
+  { href: "/gallery/vrchat", title: "VRChat Retexture Pack", tag: "VRChat", desc: "Dark neon retextures and variants." },
+  { href: "/gallery/art", title: "Icon / Branding Art", tag: "Art", desc: "Terraria-style icons, logos, and graphics." },
+  { href: "/gallery/blender", title: "3D / Blender Work", tag: "3D", desc: "Renders, podiums, and materials." },
+  { href: "/gallery/audio", title: "FNF / Audio Work", tag: "Audio", desc: "Chromatics and sound design samples." },
+  { href: "/wips", title: "W.I.P’s", tag: "WIP", desc: "Stuff I’m currently working on." },
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={`${SITE_TITLE} • Gallery`} description="Gallery of artwork, products, mods, VRChat, and more." />
-  </head>
-  <body>
-    <Header />
+<BaseLayout title={`${SITE_TITLE} • Gallery`} description="Artwork, products, mods, and more.">
+  <main class="page-shell">
+    <header class="page-head neon-card proximity-glow">
+      <div class="glow-spot"></div>
+      <h1>Gallery</h1>
+      <p>Artwork, products, mods, VRChat, and more.</p>
+    </header>
 
-    <main class="page-shell">
-      <header class="page-head neon-card proximity-glow">
-        <div class="glow-spot"></div>
-        <h1>Gallery</h1>
-        <p>Artwork, products, mods, VRChat, and more.</p>
-      </header>
+    <section class="neon-grid" style="margin-top: 1rem;">
+      {items.map((it) => (
+        <a class="neon-card proximity-glow gallery-card" href={it.href}>
+          <div class="glow-spot"></div>
+          <div class="gallery-tag">{it.tag}</div>
+          <h2>{it.title}</h2>
+          <p>{it.desc}</p>
+        </a>
+      ))}
+    </section>
+  </main>
 
-      <section class="gallery-grid">
-        {items.map((it) => (
-          <article class="neon-card proximity-glow gallery-card">
-            <div class="glow-spot"></div>
-            <div class="gallery-tag">{it.tag}</div>
-            <h2>{it.title}</h2>
-            <p>{it.desc}</p>
-          </article>
-        ))}
-      </section>
-    </main>
-
-    <Footer />
-    <script src="/proximityGlow.js" defer></script>
-  </body>
-</html>
+  <style>
+    .gallery-card{ text-decoration:none; }
+    .gallery-tag{
+      display:inline-block;
+      opacity:.75;
+      font-size:.85rem;
+      margin-bottom:.35rem;
+    }
+    .gallery-card h2{ margin:.1rem 0 0; }
+    .gallery-card p{ margin:.55rem 0 0; opacity:.9; }
+  </style>
+</BaseLayout>
