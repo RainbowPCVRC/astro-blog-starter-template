@@ -1,28 +1,31 @@
+export const onRequestGet: PagesFunction = async () => {
+  return new Response(
+    "OK — commission endpoint is live. Submit the form from /commissions (POST) to send an email.",
+    { status: 200, headers: { "content-type": "text/plain; charset=utf-8" } }
+  );
+};
+
 export const onRequestPost: PagesFunction<{
   R2_UPLOADS: R2Bucket;
 }> = async (context) => {
   const { request, env } = context;
 
-  // Parse multipart form
   const form = await request.formData();
 
   const name = String(form.get("name") || "").trim();
   const replyTo = String(form.get("reply_to") || "").trim();
   const commissionType = String(form.get("commission_type") || "").trim();
   const details = String(form.get("details") || "").trim();
+  const next = String(form.get("next") || "/commissions").trim() || "/commissions";
 
-  // Collect files (input name="files" + multiple)
   const files = form.getAll("files").filter((x): x is File => x instanceof File && x.size > 0);
 
-  // Basic validation
   if (!name || !replyTo || !commissionType || !details) {
     return new Response("Missing required fields.", { status: 400 });
   }
 
-  // Upload files to R2, collect public-ish links (we'll generate signed URLs later if you want)
   const uploaded: { key: string; name: string; size: number; type: string }[] = [];
   for (const f of files) {
-    // Limit file size (10MB each)
     if (f.size > 10 * 1024 * 1024) continue;
 
     const safeName = f.name.replace(/[^\w.\-() ]+/g, "_");
@@ -35,7 +38,8 @@ export const onRequestPost: PagesFunction<{
     uploaded.push({ key, name: f.name, size: f.size, type: f.type || "unknown" });
   }
 
-  // Build message body
+  const origin = new URL(request.url).origin;
+
   const lines: string[] = [];
   lines.push(`New commission request for RainbowVis`);
   lines.push(``);
@@ -51,14 +55,12 @@ export const onRequestPost: PagesFunction<{
     lines.push(`- None`);
   } else {
     for (const u of uploaded) {
-      const link = `https://rainbowvis.space/api/download?key=${encodeURIComponent(u.key)}`;
+      const link = `${origin}/api/download?key=${encodeURIComponent(u.key)}`;
       lines.push(`- ${u.name} (${Math.round(u.size / 1024)} KB)`);
       lines.push(`  ${link}`);
     }
   }
 
-  // Send email via MailChannels (works on Cloudflare Pages/Workers)
-  // This delivers to your gmail: rainbowvis.co@gmail.com
   const emailPayload = {
     personalizations: [
       {
@@ -68,9 +70,7 @@ export const onRequestPost: PagesFunction<{
     ],
     from: { email: "commissions@rainbowvis.space", name: "RainbowVis Site" },
     subject: `Commission Request: ${commissionType} — ${name}`,
-    content: [
-      { type: "text/plain", value: lines.join("\n") },
-    ],
+    content: [{ type: "text/plain", value: lines.join("\n") }],
   };
 
   const resp = await fetch("https://api.mailchannels.net/tx/v1/send", {
@@ -84,7 +84,5 @@ export const onRequestPost: PagesFunction<{
     return new Response(`Email failed: ${errText}`, { status: 502 });
   }
 
-  // Nice success page
-  const origin = new URL(request.url).origin;
-    return Response.redirect(`${origin}/commissions/success?next=${encodeURIComponent("/commissions")}`, 303);
+  return Response.redirect(`${origin}/commissions/success?next=${encodeURIComponent(next)}`, 303);
 };
