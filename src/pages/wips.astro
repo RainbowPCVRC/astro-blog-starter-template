@@ -1,12 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const items = [
-  { title: "New VRChat clothing items", desc: "Work-in-progress accessories and refits.", tag: "VRChat" },
-  { title: "Terraria mod visuals", desc: "Vanity sets, sprites, and UI polish.", tag: "Terraria" },
-  { title: "Branding / icons batch", desc: "Neon logo + icon explorations.", tag: "Art" },
-  { title: "Audio experiments", desc: "Sound design, chromatics, and FX layers.", tag: "Audio" }
-];
 ---
 
 <BaseLayout title="W.I.P's" description="Work in progress projects.">
@@ -18,14 +11,9 @@ const items = [
     </header>
 
     <section class="neon-grid" style="margin-top: 1rem;">
-      {items.map((it) => (
-        <article class="neon-card proximity-glow">
-          <div class="glow-spot"></div>
-          <div style="opacity:.75; font-size:.9rem; font-weight:700;">{it.tag}</div>
-          <h2 style="margin:.35rem 0 0;">{it.title}</h2>
-          <p style="margin:.5rem 0 0; opacity:.9;">{it.desc}</p>
-        </article>
-      ))}
+      <article class="neon-card proximity-glow"><div class="glow-spot"></div><h2>Coming soon</h2><p style="opacity:.9;">Drop your WIP list here any time.</p></article>
+      <article class="neon-card proximity-glow"><div class="glow-spot"></div><h2>Coming soon</h2><p style="opacity:.9;">This page is ready for your content.</p></article>
+      <article class="neon-card proximity-glow"><div class="glow-spot"></div><h2>Coming soon</h2><p style="opacity:.9;">Add images and previews later.</p></article>
     </section>
   </main>
 </BaseLayout>
