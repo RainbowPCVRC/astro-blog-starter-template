@@ -3,9 +3,8 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-
 :root {
-  --bg-main: #12091d;           /* dark purple */
+  --bg-main: #12091d; /* dark purple */
   --panel: #1b0f2e;
   --text-main: #eae6ff;
 
@@ -25,19 +24,11 @@
 }
 
 html, body {
-  background: radial-gradient(
-    circle at top,
-    #1a0c2f 0%,
-    #12091d 60%
-  );
+  background: radial-gradient(circle at top, #1a0c2f 0%, #12091d 60%);
   color: var(--text-main);
   margin: 0;
   font-family: system-ui, sans-serif;
 }
-<div class="neon-card">
-  <h2>Gallery</h2>
-  <p>Artwork & projects</p>
-</div>
 .neon-card {
   position: relative;
   background: var(--panel);
@@ -57,7 +48,7 @@ html, body {
   filter: blur(0.3px);
 }
 
-/* Inner mask so it looks like a stroke */
+/* Inner mask to make it a stroke */
 .neon-card::after {
   content: "";
   position: absolute;
@@ -66,6 +57,7 @@ html, body {
   background: var(--panel);
   z-index: -1;
 }
+
 .proximity-glow {
   transition: box-shadow 0.2s ease;
   box-shadow: var(--glow-soft);
