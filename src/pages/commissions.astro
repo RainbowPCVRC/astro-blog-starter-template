@@ -1,25 +1,67 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<BaseLayout title="Commissions">
-  <section class="page">
-    <h1>Commissions</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${SITE_TITLE} • Commissions`} description="Commission info + request form." />
+  </head>
+  <body>
+    <Header />
 
-    <p>
-      Custom artwork, avatars, mods, and assets.
-    </p>
+    <main class="page-shell">
+      <header class="page-head neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1>Commissions</h1>
+        <p>Request custom work — please include references and details.</p>
+      </header>
 
-    <form
-      action="https://formspree.io/f/YOUR_FORM_ID"
-      method="POST"
-      class="commission-form"
-    >
-      <input type="text" name="name" placeholder="Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <textarea name="details" placeholder="What are you looking for?" required></textarea>
+      <section class="section-grid">
+        <article class="neon-card proximity-glow">
+          <div class="glow-spot"></div>
+          <h2>What I do</h2>
+          <ul class="list-tight">
+            <li>Artwork / icons / branding graphics</li>
+            <li>VRChat retextures / edits</li>
+            <li>Showcase pages / product visuals</li>
+            <li>Other custom requests (ask!)</li>
+          </ul>
+        </article>
 
-      <button type="submit">Send Request</button>
-    </form>
-  </section>
-</BaseLayout>
+        <article class="neon-card proximity-glow">
+          <div class="glow-spot"></div>
+          <h2>Links</h2>
+          <ul class="list-tight">
+            <li><a href="https://rainbowscreations.gumroad.com/" target="_blank" rel="noreferrer">Gumroad</a></li>
+            <li><a href="https://jinxxy.com/rainbowvis" target="_blank" rel="noreferrer">Jinxxy</a></li>
+            <li><a href="https://ko-fi.com/rainbow_vis" target="_blank" rel="noreferrer">Ko-fi</a></li>
+            <li><a href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer">Discord</a></li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="neon-card proximity-glow" style="margin-top: 1rem;">
+        <div class="glow-spot"></div>
+        <h2>Commission Request Form</h2>
+        <p style="opacity: 0.9; margin-top: 0.25rem;">
+          Fill this out and I’ll get back to you. Include refs/links if possible.
+        </p>
+
+        <form class="form-grid" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input class="input" type="text" name="name" placeholder="Name / Handle" required />
+          <input class="input" type="email" name="email" placeholder="Email" required />
+          <input class="input" type="text" name="type" placeholder="Commission type (art / VRChat / etc.)" required />
+          <textarea class="textarea" name="details" placeholder="Describe what you want + include links to references" required></textarea>
+          <button class="button" type="submit">Send Request</button>
+        </form>
+      </section>
+    </main>
+
+    <Footer />
+    <script src="/proximityGlow.js" defer></script>
+  </body>
+</html>
