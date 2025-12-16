@@ -12,14 +12,14 @@
 
   --neon-rainbow: linear-gradient(
     90deg,
-    #ff4d4d 0%,
-    #ffa64d 14%,
-    #fff04d 28%,
-    #4dff88 42%,
-    #4dd2ff 56%,
-    #8c4dff 70%,
-    #ff4df2 84%,
-    #ff4d4d 100%
+    #ff4d4d,
+    #ffa64d,
+    #fff04d,
+    #4dff88,
+    #4dd2ff,
+    #8c4dff,
+    #ff4df2,
+    #ff4d4d
   );
 }
 
@@ -59,20 +59,20 @@ a:hover {
 /* Rainbow stroke border */
 @keyframes rainbowFlow {
   0% { background-position: 0% 50%; }
-  100% { background-position: 400% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-.neon-card::before {
+.neon-card::before{
   content: "";
   position: absolute;
   inset: -2px;
   border-radius: inherit;
   background: var(--neon-rainbow);
-  background-size: 400% 400%;
+  background-size: 400% 100%;
   background-position: 0% 50%;
   z-index: -1;
   filter: blur(0.35px);
-  animation: rainbowFlow 26s linear infinite;
+  animation: rainbowFlow 18s linear infinite;
 }
 
 /* Inner mask to make it a stroke */
@@ -302,6 +302,34 @@ a.neon-card:hover { border-bottom: none; }
 .page-head{
   padding: 1.25rem 1.35rem;
   margin-bottom: 1rem;
+}
+
+/* ===== Product Page Size ===== */
+.store-row{
+  gap: 0.9rem;
+}
+.store-card{
+  padding: 0.9rem;
+}
+.store-title{
+  margin: 0;
+  font-size: 1.05rem;
+}
+.store-desc{
+  margin: .5rem 0 .75rem;
+  opacity: .9;
+  font-size: .95rem;
+}
+.store-img{
+  max-height: 240px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.img-modal img{
+  max-width: min(92vw, 980px);
+  max-height: 82vh;
+  border-radius: 16px;
 }
 
 /* ===== Gallery ===== */
@@ -563,6 +591,7 @@ a.neon-card:hover { border-bottom: none; }
   }
 }
 
+/* ===== Contact Page ===== */
   .contact-grid{
     display:grid;
     grid-template-columns: repeat(2, minmax(0, 420px));
@@ -611,4 +640,15 @@ a.neon-card:hover { border-bottom: none; }
   
   @media (max-width: 920px){
     .contact-grid{ grid-template-columns: 1fr; }
+  }
+
+/* ===== Dropdown Text ===== */
+  select.input{
+    color: var(--text-main);
+    background: rgba(255,255,255,0.03);
+  }
+  
+  select.input option{
+    color: #000;
+    background: #fff;
   }
