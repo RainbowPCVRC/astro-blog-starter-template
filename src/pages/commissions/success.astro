@@ -1,36 +1,24 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE } from '../../consts';
-
+import BaseLayout from "../../layouts/BaseLayout.astro";
 const next = Astro.url.searchParams.get("next") || "/commissions";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={`${SITE_TITLE} • Sent!`} description="Commission request sent successfully." />
-  </head>
-  <body>
-    <Header />
-    <main class="page-shell">
-      <section class="neon-card proximity-glow" style="margin-top: 1rem;">
-        <div class="glow-spot"></div>
-        <h1 style="margin-top:0;">Request Sent ✅</h1>
-        <p style="opacity:.9;">Thanks! Your commission request was sent to RainbowVis.</p>
-        <p style="opacity:.85;">Redirecting you back in a moment…</p>
+<BaseLayout title="Sent!" description="Commission request sent successfully.">
+  <main class="page-shell">
+    <section class="neon-card proximity-glow" style="margin-top: 1rem;">
+      <div class="glow-spot"></div>
+      <h1 style="margin-top:0;">Request Sent ✅</h1>
+      <p style="opacity:.9;">Thanks! Your commission request was sent to RainbowVis.</p>
+      <p style="opacity:.85;">Redirecting you back in a moment…</p>
 
-        <p style="margin-top:1rem;">
-          <a class="store-cta" href={next}>Go back now <span class="arrow">→</span></a>
-        </p>
-      </section>
-    </main>
-    <Footer />
+      <p style="margin-top:1rem;">
+        <a class="underline-soft" href={next}>Go back now →</a>
+      </p>
+    </section>
+  </main>
 
-    <script>
-      const next = {JSON.stringify(next)};
-      setTimeout(() => { window.location.href = next; }, 2200);
-    </script>
-  </body>
-</html>
+  <script>
+    const next = {JSON.stringify(next)};
+    setTimeout(() => { window.location.href = next; }, 2200);
+  </script>
+</BaseLayout>
