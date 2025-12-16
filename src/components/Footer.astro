@@ -3,48 +3,23 @@ const today = new Date();
 ---
 
 <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      © {today.getFullYear()} RainbowVis / Rainbow’s Creations. All rights reserved.
-    </div>
-
-    <div class="footer-links" aria-label="Footer links">
-      <a href="https://rainbowscreations.gumroad.com/" target="_blank" rel="noreferrer">Gumroad</a>
-      <span class="sep">•</span>
-      <a href="https://jinxxy.com/rainbowvis" target="_blank" rel="noreferrer">Jinxxy</a>
-      <span class="sep">•</span>
-      <a href="https://ko-fi.com/rainbow_vis" target="_blank" rel="noreferrer">Ko-fi</a>
-      <span class="sep">•</span>
-      <a href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer">Discord</a>
+  <div class="inner">
+    <div class="copy">
+      &copy; {today.getFullYear()} RainbowVis / Rainbow&apos;s Creations. All rights reserved.
     </div>
   </div>
-</footer>
 
-<style>
-  .site-footer{
-    padding: 2.25rem 1rem 3rem;
-    text-align:center;
-    opacity: .9;
-  }
-  .footer-inner{
-    max-width: 1100px;
-    margin: 0 auto;
-    display:flex;
-    flex-direction:column;
-    gap: .75rem;
-    align-items:center;
-  }
-  .footer-links{
-    display:flex;
-    gap:.6rem;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .footer-links a{
-    border-bottom: 1px solid rgba(255,255,255,0.18);
-  }
-  .footer-links a:hover{
-    border-bottom-color: rgba(255,255,255,0.55);
-  }
-  .sep{ opacity:.55; }
-</style>
+  <style>
+    .site-footer{
+      margin-top: 2.5rem;
+      padding: 1.25rem 1rem 2rem;
+      background: rgba(0,0,0,0.15);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      text-align:center;
+    }
+    .copy{
+      opacity: .8;
+      font-size: .95rem;
+    }
+  </style>
+</footer>
