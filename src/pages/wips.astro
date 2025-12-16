@@ -1,0 +1,45 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const wips = [
+  { title: "Terraria Mod – New Vanity Set", desc: "Rainbow trail polish + effects." },
+  { title: "VRChat Retexture Pack", desc: "Dark neon variants (in progress)." },
+  { title: "Products – New clothing drop", desc: "Photos + listing prep." },
+  { title: "Website – Gallery upgrades", desc: "Real image grid + filters." },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${SITE_TITLE} • W.I.P’s`} description="Works in progress." />
+  </head>
+  <body>
+    <Header />
+
+    <main class="page-shell">
+      <header class="page-head neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1>W.I.P’s</h1>
+        <p>Current projects and what I’m actively working on.</p>
+      </header>
+
+      <section class="gallery-grid">
+        {wips.map((w) => (
+          <article class="neon-card proximity-glow gallery-card">
+            <div class="glow-spot"></div>
+            <div class="gallery-tag">W.I.P</div>
+            <h2>{w.title}</h2>
+            <p>{w.desc}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <Footer />
+    <script src="/proximityGlow.js" defer></script>
+  </body>
+</html>
