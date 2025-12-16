@@ -46,13 +46,14 @@ export const onRequestPost: PagesFunction<{
   lines.push(`Details:`);
   lines.push(details);
   lines.push(``);
-  lines.push(`Uploads (stored in R2):`);
+  lines.push(`Uploads:`);
   if (uploaded.length === 0) {
     lines.push(`- None`);
   } else {
-    // NOTE: These are keys in R2. In the next step, I can give you a /download route that creates signed URLs.
     for (const u of uploaded) {
-      lines.push(`- ${u.name} (${Math.round(u.size / 1024)} KB) | R2 Key: ${u.key}`);
+      const link = `https://rainbowvis.space/api/download?key=${encodeURIComponent(u.key)}`;
+      lines.push(`- ${u.name} (${Math.round(u.size / 1024)} KB)`);
+      lines.push(`  ${link}`);
     }
   }
 
