@@ -1,45 +1,31 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const items = [
   { title: "New VRChat clothing items", desc: "Work-in-progress accessories and refits.", tag: "VRChat" },
   { title: "Terraria mod visuals", desc: "Vanity sets, sprites, and UI polish.", tag: "Terraria" },
   { title: "Branding / icons batch", desc: "Neon logo + icon explorations.", tag: "Art" },
-  { title: "Audio experiments", desc: "Sound design, chromatics, and FX layers.", tag: "Audio" },
+  { title: "Audio experiments", desc: "Sound design, chromatics, and FX layers.", tag: "Audio" }
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={`${SITE_TITLE} • W.I.P's`} description="Work in progress projects." />
-  </head>
-  <body>
-    <Header />
+<BaseLayout title="W.I.P's" description="Work in progress projects.">
+  <main class="page-shell">
+    <header class="page-head neon-card proximity-glow">
+      <div class="glow-spot"></div>
+      <h1>W.I.P’s</h1>
+      <p>Stuff I’m actively working on right now.</p>
+    </header>
 
-    <main class="page-shell">
-      <header class="page-head neon-card proximity-glow">
-        <div class="glow-spot"></div>
-        <h1>W.I.P’s</h1>
-        <p>Stuff I’m actively working on right now.</p>
-      </header>
-
-      <section class="neon-grid" style="margin-top: 1rem;">
-        {items.map((it) => (
-          <article class="neon-card proximity-glow">
-            <div class="glow-spot"></div>
-            <div style="opacity:.75; font-size:.9rem; font-weight:700;">{it.tag}</div>
-            <h2 style="margin:.35rem 0 0;">{it.title}</h2>
-            <p style="margin:.5rem 0 0; opacity:.9;">{it.desc}</p>
-          </article>
-        ))}
-      </section>
-    </main>
-
-    <Footer />
-    <script src="/proximityGlow.js" defer></script>
-  </body>
-</html>
+    <section class="neon-grid" style="margin-top: 1rem;">
+      {items.map((it) => (
+        <article class="neon-card proximity-glow">
+          <div class="glow-spot"></div>
+          <div style="opacity:.75; font-size:.9rem; font-weight:700;">{it.tag}</div>
+          <h2 style="margin:.35rem 0 0;">{it.title}</h2>
+          <p style="margin:.5rem 0 0; opacity:.9;">{it.desc}</p>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
