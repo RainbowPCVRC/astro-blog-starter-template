@@ -3,6 +3,9 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE } from '../consts';
+
+const TOS_URL = "https://docs.google.com/document/d/1C3_UK_zj8uqMqW30PzZPe3SuW9PgLx-STpQGwHpyFEA/edit?usp=sharing";
+const AVATARS_URL = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN1EShEDTM1CKbwW0IR2E4/edit?usp=sharing";
 ---
 
 <!doctype html>
@@ -17,7 +20,13 @@ import { SITE_TITLE } from '../consts';
       <header class="page-head neon-card proximity-glow">
         <div class="glow-spot"></div>
         <h1>Commissions</h1>
-        <p>Request custom work — please include references and details.</p>
+        <p>Request custom work — please include references, details, and any images that help.</p>
+
+        <p style="margin-top: 0.75rem; opacity: 0.9;">
+          <a class="underline-soft" href={TOS_URL} target="_blank" rel="noreferrer">Commission TOS</a>
+          <span style="opacity:0.7;"> • </span>
+          <a class="underline-soft" href={AVATARS_URL} target="_blank" rel="noreferrer">Avatars I Own</a>
+        </p>
       </header>
 
       <section class="section-grid">
@@ -27,7 +36,9 @@ import { SITE_TITLE } from '../consts';
           <ul class="list-tight">
             <li>Artwork / icons / branding graphics</li>
             <li>VRChat retextures / edits</li>
-            <li>Showcase pages / product visuals</li>
+            <li>Clothing refits / accessory edits</li>
+            <li>Terraria sprites / mod assets</li>
+            <li>Blender / 3D work</li>
             <li>Other custom requests (ask!)</li>
           </ul>
         </article>
@@ -48,14 +59,38 @@ import { SITE_TITLE } from '../consts';
         <div class="glow-spot"></div>
         <h2>Commission Request Form</h2>
         <p style="opacity: 0.9; margin-top: 0.25rem;">
-          Fill this out and I’ll get back to you. Include refs/links if possible.
+          This sends directly to RainbowVis via a secure endpoint and includes your uploaded images as links.
         </p>
 
-        <form class="form-grid" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form
+          class="form-grid"
+          action="/api/commission"
+          method="POST"
+          enctype="multipart/form-data"
+        >
           <input class="input" type="text" name="name" placeholder="Name / Handle" required />
-          <input class="input" type="email" name="email" placeholder="Email" required />
-          <input class="input" type="text" name="type" placeholder="Commission type (art / VRChat / etc.)" required />
+          <input class="input" type="email" name="reply_to" placeholder="Your email (so I can reply)" required />
+
+          <select class="input" name="commission_type" required>
+            <option value="" disabled selected>Commission Type (choose one)</option>
+            <option>VRChat Retexture</option>
+            <option>VRChat Accessory / Clothing Refit</option>
+            <option>Icon / Branding Art</option>
+            <option>Terraria Mod Asset / Sprite</option>
+            <option>Blender / 3D</option>
+            <option>Other</option>
+          </select>
+
           <textarea class="textarea" name="details" placeholder="Describe what you want + include links to references" required></textarea>
+
+          <div class="neon-card" style="padding: 0.85rem; background: rgba(255,255,255,0.03);">
+            <div style="opacity: 0.9; margin-bottom: 0.5rem; font-weight: 600;">Upload reference images (optional)</div>
+            <input class="input" type="file" name="files" accept="image/*" multiple />
+            <div style="opacity: 0.75; margin-top: 0.45rem; font-size: 0.95rem;">
+              Tip: you can select multiple images. If you have a folder/zip, upload it too.
+            </div>
+          </div>
+
           <button class="button" type="submit">Send Request</button>
         </form>
       </section>
