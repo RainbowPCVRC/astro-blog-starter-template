@@ -1,75 +1,108 @@
 ---
-/* If your index.astro already imports a Layout, keep that.
-   This file content assumes you're inside whatever wrapper the template uses. */
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<main class="home-shell">
-  <!-- LEFT: main hub -->
-  <section class="home-main">
-    <header class="home-hero neon-card proximity-glow">
-      <h1 class="home-title">RainbowVis</h1>
-      <p class="home-subtitle">
-        Gallery • Products • Commissions • Community
-      </p>
-    </header>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
 
-    <section class="neon-grid home-grid">
-      <a class="neon-card proximity-glow" href="/gallery">
-        <h2>Gallery</h2>
-        <p>Artwork, mods, showcases, and featured pieces.</p>
-      </a>
+		<main class="home-shell">
+			<!-- LEFT: main hub -->
+			<section class="home-main">
+				<header class="home-hero neon-card proximity-glow">
+					<h1 class="home-title">RainbowVis</h1>
+					<p class="home-subtitle">Gallery • Products • Commissions • Community</p>
+				</header>
 
-      <a class="neon-card proximity-glow" href="/commissions">
-        <h2>Commissions</h2>
-        <p>Request custom work (form + info).</p>
-      </a>
+				<section class="neon-grid home-grid">
+					<a class="neon-card proximity-glow" href="/gallery">
+						<h2>Gallery</h2>
+						<p>Artwork, mods, showcases, and featured pieces.</p>
+					</a>
 
-      <a class="neon-card proximity-glow" href="https://rainbowscreations.gumroad.com/" target="_blank" rel="noreferrer">
-        <h2>Gumroad</h2>
-        <p>Digital products & downloads.</p>
-      </a>
+					<a class="neon-card proximity-glow" href="/commissions">
+						<h2>Commissions</h2>
+						<p>Request custom work (form + info).</p>
+					</a>
 
-      <a class="neon-card proximity-glow" href="https://jinxxy.com/rainbowvis" target="_blank" rel="noreferrer">
-        <h2>Jinxxy</h2>
-        <p>VRChat-related items & listings.</p>
-      </a>
+					<a
+						class="neon-card proximity-glow"
+						href="https://rainbowscreations.gumroad.com/"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<h2>Gumroad</h2>
+						<p>Digital products & downloads.</p>
+					</a>
 
-      <a class="neon-card proximity-glow" href="https://ko-fi.com/rainbow_vis" target="_blank" rel="noreferrer">
-        <h2>Ko-fi</h2>
-        <p>Support me + extras.</p>
-      </a>
-    </section>
+					<a
+						class="neon-card proximity-glow"
+						href="https://jinxxy.com/rainbowvis"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<h2>Jinxxy</h2>
+						<p>VRChat-related items & listings.</p>
+					</a>
 
-    <section class="neon-card proximity-glow home-socials">
-      <h2>Socials</h2>
-      <div class="social-grid">
-        <a href="https://bsky.app/profile/rainbowvis.bsky.social" target="_blank" rel="noreferrer">Bluesky</a>
-        <a href="https://x.com/Rainbow_Vis?s=20" target="_blank" rel="noreferrer">Twitter / X</a>
-        <a href="https://www.youtube.com/@RainbowVis" target="_blank" rel="noreferrer">YouTube</a>
-        <a href="https://www.twitch.tv/rainbow_vis" target="_blank" rel="noreferrer">Twitch</a>
-        <a href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer">Discord Invite</a>
-      </div>
-    </section>
-  </section>
+					<a
+						class="neon-card proximity-glow"
+						href="https://ko-fi.com/rainbow_vis"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<h2>Ko-fi</h2>
+						<p>Support me + extras.</p>
+					</a>
+				</section>
 
-  <!-- RIGHT: Discord widget sidebar -->
-  <aside class="home-side">
-    <div class="neon-card proximity-glow discord-card">
-      <h2 class="discord-title">Community</h2>
-      <p class="discord-subtitle">Join the 18+ Discord</p>
+				<section class="neon-card proximity-glow home-socials">
+					<h2>Socials</h2>
+					<div class="social-grid">
+						<a href="https://bsky.app/profile/rainbowvis.bsky.social" target="_blank" rel="noreferrer"
+							>Bluesky</a
+						>
+						<a href="https://x.com/Rainbow_Vis?s=20" target="_blank" rel="noreferrer">Twitter / X</a>
+						<a href="https://www.youtube.com/@RainbowVis" target="_blank" rel="noreferrer">YouTube</a>
+						<a href="https://www.twitch.tv/rainbow_vis" target="_blank" rel="noreferrer">Twitch</a>
+						<a href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer"
+							>Discord Invite</a
+						>
+					</div>
+				</section>
+			</section>
 
-      <div class="discord-frame-wrap">
-        <iframe
-          src="https://discord.com/widget?id=1318693081574543380&theme=dark"
-          width="350"
-          height="500"
-          allowtransparency="true"
-          frameborder="0"
-          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-          loading="lazy"
-          title="RainbowVis Discord Widget"
-        ></iframe>
-      </div>
-    </div>
-  </aside>
-</main>
+			<!-- RIGHT: Discord widget sidebar -->
+			<aside class="home-side">
+				<div class="neon-card proximity-glow discord-card">
+					<h2 class="discord-title">Community</h2>
+					<p class="discord-subtitle">Join the 18+ Discord</p>
+
+					<div class="discord-frame-wrap">
+						<iframe
+							src="https://discord.com/widget?id=1318693081574543380&theme=dark"
+							width="350"
+							height="500"
+							allowtransparency="true"
+							frameborder="0"
+							sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+							loading="lazy"
+							title="RainbowVis Discord Widget"
+						></iframe>
+					</div>
+				</div>
+			</aside>
+		</main>
+
+		<Footer />
+
+		<script src="/proximityGlow.js" defer></script>
+	</body>
+</html>
