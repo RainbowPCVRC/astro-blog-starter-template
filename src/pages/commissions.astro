@@ -59,10 +59,12 @@ const AVATARS_URL = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
         <div class="glow-spot"></div>
         <h2>Commission Request Form</h2>
         <p style="opacity: 0.9; margin-top: 0.25rem;">
-          This sends directly to RainbowVis and includes your uploaded images as secure links.
+          This sends directly to RainbowVis (email) and includes your uploaded images as links.
         </p>
 
         <form class="form-grid" action="/api/commission" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="next" value="/commissions" />
+
           <input class="input" type="text" name="name" placeholder="Name / Handle" required />
           <input class="input" type="email" name="reply_to" placeholder="Your email (so I can reply)" required />
 
@@ -76,10 +78,10 @@ const AVATARS_URL = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
             <option value="Other">Other</option>
           </select>
 
-          <textarea class="textarea" name="details" placeholder="Describe what you want!" required></textarea>
+          <textarea class="textarea" name="details" placeholder="Describe what you want + include links if possible." required></textarea>
 
           <div class="neon-card" style="padding: 0.85rem; background: rgba(255,255,255,0.03);">
-            <div style="opacity: 0.9; margin-bottom: 0.5rem; font-weight: 700;">Upload references (optional)</div>
+            <div style="opacity: 0.9; margin-bottom: 0.5rem; font-weight: 700;">Upload reference images (optional)</div>
             <input class="input" type="file" name="files" accept="image/*" multiple />
             <div style="opacity: 0.75; margin-top: 0.45rem; font-size: 0.95rem;">
               You can select multiple images.
