@@ -11,25 +11,26 @@ const next = Astro.url.searchParams.get("next") || "/commissions";
 <html lang="en">
   <head>
     <BaseHead title={`${SITE_TITLE} • Sent!`} description="Commission request sent successfully." />
-    <meta http-equiv="refresh" content={`4;url=${next}`} />
   </head>
   <body>
     <Header />
-
     <main class="page-shell">
-      <section class="page-head neon-card proximity-glow">
+      <section class="neon-card proximity-glow" style="margin-top: 1rem;">
         <div class="glow-spot"></div>
-        <h1>Request Sent!</h1>
-        <p>Thank you — your commission request was delivered successfully.</p>
-        <p style="opacity:0.85;">Redirecting back in a few seconds…</p>
+        <h1 style="margin-top:0;">Request Sent ✅</h1>
+        <p style="opacity:.9;">Thanks! Your commission request was sent to RainbowVis.</p>
+        <p style="opacity:.85;">Redirecting you back in a moment…</p>
 
-        <a class="button" href={next} style="margin-top:0.75rem; display:inline-flex;">
-          Go back now →
-        </a>
+        <p style="margin-top:1rem;">
+          <a class="store-cta" href={next}>Go back now <span class="arrow">→</span></a>
+        </p>
       </section>
     </main>
-
     <Footer />
-    <script src="/proximityGlow.js" defer></script>
+
+    <script>
+      const next = {JSON.stringify(next)};
+      setTimeout(() => { window.location.href = next; }, 2200);
+    </script>
   </body>
 </html>
