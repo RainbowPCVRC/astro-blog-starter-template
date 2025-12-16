@@ -59,19 +59,22 @@ a:hover {
 }
 
 /* Rainbow stroke border */
-@keyframes hueShift {
-  from { filter: hue-rotate(0deg); }
-  to { filter: hue-rotate(360deg); }
+@keyframes rainbowFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
 }
+
 .neon-card::before {
   content: "";
   position: absolute;
   inset: -2px;
   border-radius: inherit;
   background: var(--neon-rainbow);
+  background-size: 300% 300%;
+  background-position: 0% 50%;
   z-index: -1;
   filter: blur(0.3px);
-  animation: hueShift 14s linear infinite;
+  animation: rainbowFlow 22s linear infinite;
 }
 
 /* Inner mask to make it a stroke */
