@@ -1,161 +1,179 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { LINKS } from "../consts";
+
+const icon = (src: string, fallback: string) => `
+  <img class="icon-img" src="${src}" alt=""
+    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+  <span class="icon-fallback">${fallback}</span>
+`;
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
+<BaseLayout title="Home">
+  <main class="home-shell">
+    <section class="home-main">
+      <header class="home-hero neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1 class="home-title">RainbowVis</h1>
+        <p class="home-subtitle">Gallery • Products • Commissions • Community</p>
+      </header>
 
-		<main class="home-shell">
-			<!-- LEFT: main hub -->
-			<section class="home-main">
-				<header class="home-hero neon-card proximity-glow">
-					<div class="glow-spot"></div>
-					<h1 class="home-title">RainbowVis</h1>
-					<p class="home-subtitle">Gallery • Products • Commissions • Community</p>
-				</header>
+      <section class="neon-grid home-grid">
+        <a class="neon-card proximity-glow" href="/gallery">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/gallery.svg","🖼️")}></span>
+            <h2>Gallery</h2>
+          </div>
+          <p>Artwork, mods, showcases, and featured pieces.</p>
+        </a>
 
-				<section class="neon-grid home-grid">
-					<a class="neon-card proximity-glow" href="/gallery">
-						<div class="glow-spot"></div>
-						<div class="card-top">
-							<span class="card-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none">
-									<path d="M4 7.5C4 6.1 5.1 5 6.5 5h11C19.9 5 21 6.1 21 7.5v9C21 17.9 19.9 19 18.5 19h-11C5.1 19 4 17.9 4 16.5v-9Z" stroke="currentColor" stroke-width="1.7"/>
-									<path d="M8 14l2-2 2.2 2.2 3.1-3.1L20 14.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-							</span>
-							<h2>Gallery</h2>
-						</div>
-						<p>Artwork, mods, showcases, and featured pieces.</p>
-					</a>
+        <a class="neon-card proximity-glow" href="/commissions">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/form.svg","📝")}></span>
+            <h2>Commissions</h2>
+          </div>
+          <p>Request custom work (form + info).</p>
+        </a>
 
-					<a class="neon-card proximity-glow" href="/commissions">
-						<div class="glow-spot"></div>
-						<div class="card-top">
-							<span class="card-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none">
-									<path d="M7 3h10v4H7V3Z" stroke="currentColor" stroke-width="1.7"/>
-									<path d="M6 7h12v14H6V7Z" stroke="currentColor" stroke-width="1.7"/>
-									<path d="M8.5 11h7M8.5 14h7M8.5 17h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								</svg>
-							</span>
-							<h2>Commissions</h2>
-						</div>
-						<p>Request custom work (form + info).</p>
-					</a>
+        <a class="neon-card proximity-glow" href={LINKS.gumroad} target="_blank" rel="noreferrer">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/gumroad.svg","🧾")}></span>
+            <h2>Gumroad</h2>
+          </div>
+          <p>Digital products & downloads.</p>
+        </a>
 
-					<a class="neon-card proximity-glow" href="https://rainbowscreations.gumroad.com/" target="_blank" rel="noreferrer">
-						<div class="glow-spot"></div>
-						<div class="card-top">
-							<span class="card-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none">
-									<path d="M7 7.5A4.5 4.5 0 0 1 11.5 3h1A4.5 4.5 0 0 1 17 7.5v1A4.5 4.5 0 0 1 12.5 13h-1A4.5 4.5 0 0 1 7 8.5v-1Z" stroke="currentColor" stroke-width="1.7"/>
-									<path d="M6 21h12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-									<path d="M9 21v-3.2c0-1 .8-1.8 1.8-1.8h2.4c1 0 1.8.8 1.8 1.8V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								</svg>
-							</span>
-							<h2>Gumroad</h2>
-						</div>
-						<p>Digital products & downloads.</p>
-					</a>
+        <a class="neon-card proximity-glow" href={LINKS.jinxxy} target="_blank" rel="noreferrer">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/jinxxy.svg","🔗")}></span>
+            <h2>Jinxxy</h2>
+          </div>
+          <p>VRChat-related items & listings.</p>
+        </a>
 
-					<a class="neon-card proximity-glow" href="https://jinxxy.com/rainbowvis" target="_blank" rel="noreferrer">
-						<div class="glow-spot"></div>
-						<div class="card-top">
-							<span class="card-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none">
-									<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-									<path d="M12 7v10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-									<path d="M7.5 10.2L12 12.5l4.5-2.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-								</svg>
-							</span>
-							<h2>Jinxxy</h2>
-						</div>
-						<p>VRChat-related items & listings.</p>
-					</a>
+        <a class="neon-card proximity-glow" href={LINKS.kofi} target="_blank" rel="noreferrer">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/kofi.svg","☕")}></span>
+            <h2>Ko-fi</h2>
+          </div>
+          <p>Support me + extras.</p>
+        </a>
 
-					<a class="neon-card proximity-glow" href="https://ko-fi.com/rainbow_vis" target="_blank" rel="noreferrer">
-						<div class="glow-spot"></div>
-						<div class="card-top">
-							<span class="card-icon" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="none">
-									<path d="M6 7h10v10a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V7Z" stroke="currentColor" stroke-width="1.7"/>
-									<path d="M16 9h1.2A2.8 2.8 0 0 1 20 11.8v.4A2.8 2.8 0 0 1 17.2 15H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-									<path d="M9 6V4h4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								</svg>
-							</span>
-							<h2>Ko-fi</h2>
-						</div>
-						<p>Support me + extras.</p>
-					</a>
-				</section>
+        <!-- ✅ NEW: About Me card (fills your empty slot) -->
+        <a class="neon-card proximity-glow" href="/about">
+          <div class="glow-spot"></div>
+          <div class="card-title-row">
+            <span class="card-ico" set:html={icon("/icons/about.svg","👤")}></span>
+            <h2>About Me</h2>
+          </div>
+          <p>Who I am + what I do.</p>
+        </a>
+      </section>
 
-				<section class="neon-card proximity-glow home-socials">
-					<div class="glow-spot"></div>
-					<div class="card-top">
-						<span class="card-icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" fill="none">
-								<path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z" stroke="currentColor" stroke-width="1.7"/>
-								<path d="M8.5 12h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								<path d="M12 8.5v7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-							</svg>
-						</span>
-						<h2>Socials</h2>
-					</div>
+      <section class="neon-card proximity-glow social-panel">
+        <div class="glow-spot"></div>
+        <div class="card-title-row">
+          <span class="card-ico" set:html={icon("/icons/social.svg","✨")}></span>
+          <h2>Socials</h2>
+        </div>
+        <div class="social-grid">
+          <a class="chip" href={LINKS.bluesky} target="_blank" rel="noreferrer">
+            <span set:html={icon("/icons/bluesky.svg","🦋")}></span> Bluesky
+          </a>
+          <a class="chip" href={LINKS.twitter} target="_blank" rel="noreferrer">
+            <span set:html={icon("/icons/twitter.svg","𝕏")}></span> Twitter / X
+          </a>
+          <a class="chip" href={LINKS.youtube} target="_blank" rel="noreferrer">
+            <span set:html={icon("/icons/youtube.svg","▶")}></span> YouTube
+          </a>
+          <a class="chip" href={LINKS.twitch} target="_blank" rel="noreferrer">
+            <span set:html={icon("/icons/twitch.svg","⌁")}></span> Twitch
+          </a>
+          <a class="chip" href={LINKS.discordInvite} target="_blank" rel="noreferrer">
+            <span set:html={icon("/icons/discord.svg","⌗")}></span> Discord Invite
+          </a>
+        </div>
+      </section>
+    </section>
 
-					<div class="social-grid">
-						<a href="https://bsky.app/profile/rainbowvis.bsky.social" target="_blank" rel="noreferrer">Bluesky</a>
-						<a href="https://x.com/Rainbow_Vis?s=20" target="_blank" rel="noreferrer">Twitter / X</a>
-						<a href="https://www.youtube.com/@RainbowVis" target="_blank" rel="noreferrer">YouTube</a>
-						<a href="https://www.twitch.tv/rainbow_vis" target="_blank" rel="noreferrer">Twitch</a>
-						<a href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer">Discord Invite</a>
-					</div>
-				</section>
-			</section>
+    <aside class="home-side">
+      <div class="neon-card proximity-glow discord-card">
+        <div class="glow-spot"></div>
+        <h2 class="discord-title">RainbowVis's Discord Community</h2>
+        <p class="discord-subtitle">Join The Skittle Bag (+18) Discord Community!</p>
 
-			<!-- RIGHT: Discord widget sidebar -->
-			<aside class="home-side">
-				<div class="neon-card proximity-glow discord-card">
-					<div class="glow-spot"></div>
-					<div class="card-top">
-						<span class="card-icon" aria-hidden="true">
-							<svg viewBox="0 0 24 24" fill="none">
-								<path d="M8 7c1.2-.8 2.6-1.2 4-1.2S14.8 6.2 16 7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								<path d="M7 18c2.6 1 7.4 1 10 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								<path d="M7.5 8.2c-1.3 2.6-1.7 5.3-1.5 8.3 0 0 2 1.5 6 1.5s6-1.5 6-1.5c.2-3-.2-5.7-1.5-8.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-								<path d="M9.5 13.2h.01M14.5 13.2h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-							</svg>
-						</span>
-						<h2 class="discord-title">Community</h2>
-					</div>
-					<p class="discord-subtitle">Join the 18+ Discord</p>
+        <div class="discord-frame-wrap">
+          <iframe
+            src="https://discord.com/widget?id=1318693081574543380&theme=dark"
+            width="350"
+            height="500"
+            allowtransparency="true"
+            frameborder="0"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+            loading="lazy"
+            title="RainbowVis Discord Widget"
+          ></iframe>
+        </div>
+      </div>
 
-					<div class="discord-frame-wrap">
-						<iframe
-							src="https://discord.com/widget?id=1318693081574543380&theme=dark"
-							width="350"
-							height="500"
-							allowtransparency="true"
-							frameborder="0"
-							sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-							loading="lazy"
-							title="RainbowVis Discord Widget"
-						></iframe>
-					</div>
-				</div>
-			</aside>
-		</main>
+      <!-- ✅ NEW: Twitch embed box under the Discord widget -->
+      <div class="neon-card proximity-glow twitch-card" style="margin-top: 1rem;">
+        <div class="glow-spot"></div>
+        <div class="card-title-row">
+          <span class="card-ico" set:html={icon("/icons/twitch.svg","⌁")}></span>
+          <h2 style="margin:0;">Twitch Livestream</h2>
+        </div>
+        <p style="opacity:.9; margin:.5rem 0 .75rem;">
+          Shows live when I’m streaming.
+        </p>
 
-		<Footer />
+        <div class="discord-frame-wrap">
+          <iframe
+            id="twitchPlayer"
+            width="100%"
+            height="220"
+            frameborder="0"
+            allowfullscreen="true"
+            scrolling="no"
+            title="Twitch player"
+          ></iframe>
+        </div>
 
-		<script src="/proximityGlow.js" defer></script>
-	</body>
-</html>
+        <script>
+          // Twitch requires parent=your-domain. We set it dynamically so it works on workers.dev AND rainbowvis.space
+          const host = window.location.hostname;
+          const parent = encodeURIComponent(host);
+          const channel = "rainbow_vis";
+          const src = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&muted=true`;
+          const el = document.getElementById("twitchPlayer");
+          if (el) el.src = src;
+        </script>
+      </div>
+    </aside>
+  </main>
+
+  <style>
+    .card-title-row{
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+    .card-title-row h2{ margin:0; }
+    .card-ico{
+      display:inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items:center;
+      justify-content:center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      flex: 0 0 auto;
+    }
+  </style>
+</BaseLayout>
