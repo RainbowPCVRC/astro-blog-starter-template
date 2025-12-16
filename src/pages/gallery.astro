@@ -1,10 +1,46 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const items = [
+  { title: "Terraria Mod Showcase", tag: "Mods", desc: "Vanity sets, weapons, effects, and previews." },
+  { title: "VRChat Retexture Pack", tag: "VRChat", desc: "Dark neon retextures and variants." },
+  { title: "Icon / Branding Art", tag: "Art", desc: "Terraria-style icons, logos, and graphics." },
+  { title: "3D / Blender Work", tag: "3D", desc: "Renders, podiums, and materials." },
+  { title: "FNF / Audio Work", tag: "Audio", desc: "Chromatics and sound design samples." },
+];
 ---
 
-<BaseLayout title="Gallery">
-  <section class="page">
-    <h1>Gallery</h1>
-    <p>Artwork, mods, and products by RainbowVis</p>
-  </section>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${SITE_TITLE} • Gallery`} description="Gallery of artwork, products, mods, VRChat, and more." />
+  </head>
+  <body>
+    <Header />
+
+    <main class="page-shell">
+      <header class="page-head neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1>Gallery</h1>
+        <p>Artwork, products, mods, VRChat, and more.</p>
+      </header>
+
+      <section class="gallery-grid">
+        {items.map((it) => (
+          <article class="neon-card proximity-glow gallery-card">
+            <div class="glow-spot"></div>
+            <div class="gallery-tag">{it.tag}</div>
+            <h2>{it.title}</h2>
+            <p>{it.desc}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <Footer />
+    <script src="/proximityGlow.js" defer></script>
+  </body>
+</html>
