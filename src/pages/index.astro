@@ -1,12 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { LINKS } from "../consts";
-
-const icon = (src: string, fallback: string) => `
-  <img class="icon-img" src="${src}" alt=""
-    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
-  <span class="icon-fallback">${fallback}</span>
-`;
+import { LINKS, TWITCH_CHANNEL } from "../consts";
 ---
 
 <BaseLayout title="Home">
@@ -18,11 +12,11 @@ const icon = (src: string, fallback: string) => `
         <p class="home-subtitle">Gallery • Products • Commissions • Community</p>
       </header>
 
-      <section class="neon-grid home-grid">
+      <section class="neon-grid">
         <a class="neon-card proximity-glow" href="/gallery">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/gallery.svg","🖼️")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/gallery.svg" alt="" /></span>
             <h2>Gallery</h2>
           </div>
           <p>Artwork, mods, showcases, and featured pieces.</p>
@@ -31,7 +25,7 @@ const icon = (src: string, fallback: string) => `
         <a class="neon-card proximity-glow" href="/commissions">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/form.svg","📝")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/form.svg" alt="" /></span>
             <h2>Commissions</h2>
           </div>
           <p>Request custom work (form + info).</p>
@@ -40,7 +34,7 @@ const icon = (src: string, fallback: string) => `
         <a class="neon-card proximity-glow" href={LINKS.gumroad} target="_blank" rel="noreferrer">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/gumroad.svg","🧾")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/gumroad.svg" alt="" /></span>
             <h2>Gumroad</h2>
           </div>
           <p>Digital products & downloads.</p>
@@ -49,7 +43,7 @@ const icon = (src: string, fallback: string) => `
         <a class="neon-card proximity-glow" href={LINKS.jinxxy} target="_blank" rel="noreferrer">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/jinxxy.svg","🔗")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/jinxxy.svg" alt="" /></span>
             <h2>Jinxxy</h2>
           </div>
           <p>VRChat-related items & listings.</p>
@@ -58,54 +52,54 @@ const icon = (src: string, fallback: string) => `
         <a class="neon-card proximity-glow" href={LINKS.kofi} target="_blank" rel="noreferrer">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/kofi.svg","☕")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/kofi.svg" alt="" /></span>
             <h2>Ko-fi</h2>
           </div>
           <p>Support me + extras.</p>
         </a>
 
-        <!-- ✅ NEW: About Me card (fills your empty slot) -->
+        <!-- NEW: About Me card -->
         <a class="neon-card proximity-glow" href="/about">
           <div class="glow-spot"></div>
           <div class="card-title-row">
-            <span class="card-ico" set:html={icon("/icons/about.svg","👤")}></span>
+            <span class="card-ico"><img class="icon-img" src="/icons/about.svg" alt="" /></span>
             <h2>About Me</h2>
           </div>
           <p>Who I am + what I do.</p>
         </a>
       </section>
 
-      <section class="neon-card proximity-glow social-panel">
+      <section class="neon-card proximity-glow" style="margin-top: 1rem;">
         <div class="glow-spot"></div>
         <div class="card-title-row">
-          <span class="card-ico" set:html={icon("/icons/social.svg","✨")}></span>
+          <span class="card-ico"><img class="icon-img" src="/icons/social.svg" alt="" /></span>
           <h2>Socials</h2>
         </div>
         <div class="social-grid">
           <a class="chip" href={LINKS.bluesky} target="_blank" rel="noreferrer">
-            <span set:html={icon("/icons/bluesky.svg","🦋")}></span> Bluesky
+            <img class="icon-img" src="/icons/bluesky.svg" alt="" /> Bluesky
           </a>
           <a class="chip" href={LINKS.twitter} target="_blank" rel="noreferrer">
-            <span set:html={icon("/icons/twitter.svg","𝕏")}></span> Twitter / X
+            <img class="icon-img" src="/icons/twitter.svg" alt="" /> Twitter / X
           </a>
           <a class="chip" href={LINKS.youtube} target="_blank" rel="noreferrer">
-            <span set:html={icon("/icons/youtube.svg","▶")}></span> YouTube
+            <img class="icon-img" src="/icons/youtube.svg" alt="" /> YouTube
           </a>
           <a class="chip" href={LINKS.twitch} target="_blank" rel="noreferrer">
-            <span set:html={icon("/icons/twitch.svg","⌁")}></span> Twitch
+            <img class="icon-img" src="/icons/twitch.svg" alt="" /> Twitch
           </a>
           <a class="chip" href={LINKS.discordInvite} target="_blank" rel="noreferrer">
-            <span set:html={icon("/icons/discord.svg","⌗")}></span> Discord Invite
+            <img class="icon-img" src="/icons/discord.svg" alt="" /> Discord Invite
           </a>
         </div>
       </section>
     </section>
 
     <aside class="home-side">
-      <div class="neon-card proximity-glow discord-card">
+      <div class="neon-card proximity-glow">
         <div class="glow-spot"></div>
-        <h2 class="discord-title">RainbowVis's Discord Community</h2>
-        <p class="discord-subtitle">Join The Skittle Bag (+18) Discord Community!</p>
+        <h2 style="margin:0;">RainbowVis's Discord Community</h2>
+        <p style="opacity:.9; margin:.5rem 0 .75rem;">Join The Skittle Bag (+18) Discord Community!</p>
 
         <div class="discord-frame-wrap">
           <iframe
@@ -121,16 +115,14 @@ const icon = (src: string, fallback: string) => `
         </div>
       </div>
 
-      <!-- ✅ NEW: Twitch embed box under the Discord widget -->
-      <div class="neon-card proximity-glow twitch-card" style="margin-top: 1rem;">
+      <!-- NEW: Twitch embed under Discord widget -->
+      <div class="neon-card proximity-glow" style="margin-top: 1rem;">
         <div class="glow-spot"></div>
         <div class="card-title-row">
-          <span class="card-ico" set:html={icon("/icons/twitch.svg","⌁")}></span>
+          <span class="card-ico"><img class="icon-img" src="/icons/twitch.svg" alt="" /></span>
           <h2 style="margin:0;">Twitch Livestream</h2>
         </div>
-        <p style="opacity:.9; margin:.5rem 0 .75rem;">
-          Shows live when I’m streaming.
-        </p>
+        <p style="opacity:.9; margin:.5rem 0 .75rem;">Shows live when I’m streaming.</p>
 
         <div class="discord-frame-wrap">
           <iframe
@@ -145,10 +137,9 @@ const icon = (src: string, fallback: string) => `
         </div>
 
         <script>
-          // Twitch requires parent=your-domain. We set it dynamically so it works on workers.dev AND rainbowvis.space
           const host = window.location.hostname;
           const parent = encodeURIComponent(host);
-          const channel = "rainbow_vis";
+          const channel = {JSON.stringify(TWITCH_CHANNEL)};
           const src = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&muted=true`;
           const el = document.getElementById("twitchPlayer");
           if (el) el.src = src;
@@ -158,18 +149,12 @@ const icon = (src: string, fallback: string) => `
   </main>
 
   <style>
-    .card-title-row{
-      display:flex;
-      align-items:center;
-      gap:.6rem;
-    }
+    .card-title-row{ display:flex; align-items:center; gap:.6rem; }
     .card-title-row h2{ margin:0; }
     .card-ico{
       display:inline-flex;
-      width: 34px;
-      height: 34px;
-      align-items:center;
-      justify-content:center;
+      width: 34px; height: 34px;
+      align-items:center; justify-content:center;
       border-radius: 12px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
