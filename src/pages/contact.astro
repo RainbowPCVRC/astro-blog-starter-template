@@ -1,0 +1,47 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={`${SITE_TITLE} • Contact`} description="Contact RainbowVis" />
+  </head>
+  <body>
+    <Header />
+
+    <main class="page-shell">
+      <header class="page-head neon-card proximity-glow">
+        <div class="glow-spot"></div>
+        <h1>Contact</h1>
+        <p>Best ways to reach me:</p>
+      </header>
+
+      <section class="neon-grid">
+        <a class="neon-card proximity-glow" href="mailto:rainbowvis.co@gmail.com">
+          <div class="glow-spot"></div>
+          <h2>Email</h2>
+          <p>rainbowvis.co@gmail.com</p>
+        </a>
+
+        <a class="neon-card proximity-glow" href="https://discord.com/invite/xYczE7TSMv" target="_blank" rel="noreferrer">
+          <div class="glow-spot"></div>
+          <h2>Discord</h2>
+          <p>Join the Skittle Bag (+18) community</p>
+        </a>
+
+        <a class="neon-card proximity-glow" href="https://ko-fi.com/rainbow_vis" target="_blank" rel="noreferrer">
+          <div class="glow-spot"></div>
+          <h2>Ko-fi</h2>
+          <p>Support + memberships</p>
+        </a>
+      </section>
+    </main>
+
+    <Footer />
+    <script src="/proximityGlow.js" defer></script>
+  </body>
+</html>
