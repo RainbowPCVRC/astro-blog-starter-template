@@ -3,42 +3,42 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE_TITLE, LINKS } from "../consts";
 ---
 
-<BaseLayout title={`${SITE_TITLE} • Contacts`} description="How to reach RainbowVis.">
+<BaseLayout title={`${SITE_TITLE} • Contacts`} description="How to reach RainbowVis!">
   <main class="page-shell">
     <header class="page-head neon-card proximity-glow">
       <div class="glow-spot"></div>
-      <h1>Contacts</h1>
-      <p>Here’s the best ways to reach me.</p>
+      <img class="header-icon" src="/icons/contact.png" alt+"" />
+      <div><h1>Contacts</h1><p>Here are the best ways to reach me:</p>
     </header>
 
     <section class="contact-grid" style="margin-top: 1rem;">
       <a class="neon-card proximity-glow contact-card" href={LINKS.discordInvite} target="_blank" rel="noreferrer">
         <div class="glow-spot"></div>
-        <img class="contact-icon" src="/icons/discord.svg" alt="" />
+        <img class="contact-icon" src="/icons/discord.png" alt="" />
         <div><h2>Discord</h2><p>rainbow_vis</p></div>
       </a>
 
       <div class="neon-card proximity-glow contact-card">
         <div class="glow-spot"></div>
-        <img class="contact-icon" src="/icons/vrchat.svg" alt="" />
+        <img class="contact-icon" src="/icons/vrchat.png" alt="" />
         <div><h2>VRChat</h2><p>Rainbow_Vis</p></div>
       </div>
 
       <a class="neon-card proximity-glow contact-card" href="mailto:rainbowvis.co@gmail.com">
         <div class="glow-spot"></div>
-        <img class="contact-icon" src="/icons/gmail.svg" alt="" />
+        <img class="contact-icon" src="/icons/gmail.png" alt="" />
         <div><h2>Gmail</h2><p>rainbowvis.co@gmail.com</p></div>
       </a>
 
       <a class="neon-card proximity-glow contact-card" href={LINKS.twitter} target="_blank" rel="noreferrer">
         <div class="glow-spot"></div>
-        <img class="contact-icon" src="/icons/twitter.svg" alt="" />
+        <img class="contact-icon" src="/icons/twitter.png" alt="" />
         <div><h2>Twitter / X</h2><p>@RainbowVis</p></div>
       </a>
 
       <a class="neon-card proximity-glow contact-card" href={LINKS.bluesky} target="_blank" rel="noreferrer">
         <div class="glow-spot"></div>
-        <img class="contact-icon" src="/icons/bluesky.svg" alt="" />
+        <img class="contact-icon" src="/icons/bluesky.png" alt="" />
         <div><h2>Bluesky</h2><p>@rainbowvis.bsky.social</p></div>
       </a>
     </section>
