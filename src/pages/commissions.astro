@@ -24,8 +24,8 @@ const avatarsLink = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
         <div class="glow-spot"></div>
         <h2>What I do</h2>
         <ul style="margin:.6rem 0 0; opacity:.95;">
-          <li>Artwork / icons / branding graphics</li>
-          <li>VRChat retextures / edits</li>
+          <li>Artwork / Icons / Graphics</li>
+          <li>VRChat Retextures / Avater Edits</li>
           <li>Showcase pages / product visuals</li>
           <li>Other custom requests (ask!)</li>
         </ul>
@@ -35,7 +35,7 @@ const avatarsLink = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
         <div class="glow-spot"></div>
         <h2>Commission Request Form</h2>
         <p style="opacity:.9; margin:.4rem 0 .75rem;">
-          Fill this out and I’ll get back to you. Include refs/links if possible.
+          Fill this out and I’ll get back to you within 1-3 days! Include refs/links if possible.
         </p>
 
         <form method="POST" action="/api/commission" enctype="multipart/form-data">
@@ -47,8 +47,9 @@ const avatarsLink = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
             <option>VRChat Retexture</option>
             <option>VRChat Accessory / Clothing Refit</option>
             <option>Icon / Branding Art</option>
-            <option>Terraria Mod Asset / Sprite</option>
+            <option>Terraria Mod Asset / Sprites</option>
             <option>Blender / 3D</option>
+            <option>FNF / Music & Sound Design</option>
             <option>Other</option>
           </select>
 
@@ -59,7 +60,7 @@ const avatarsLink = "https://docs.google.com/document/d/1BTdyo2qLl1mm_pQfx9sHNoN
             <input class="input" type="file" name="files" accept="image/*" multiple />
           </label>
 
-          <input type="file" name="files" multiple />
+          <input type="hidden" name="hidden" multiple />
 
           <button class="button" type="submit">Send Request</button>
         </form>
