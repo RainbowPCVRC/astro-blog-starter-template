@@ -1,6 +1,4 @@
 ---
-<link rel="stylesheet" href="/styles/global.css" />
-
 interface Props {
   title: string;
   description?: string;
@@ -19,6 +17,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 {description && <meta name="description" content={description} />}
 
 <link rel="canonical" href={canonicalURL} />
+
+<!-- CSS from public/ -->
+<link rel="stylesheet" href="/styles/global.css" />
 
 <!-- Site icon -->
 <link rel="icon" type="image/svg+xml" href="/RainbowsCreationsIcon.svg" />
