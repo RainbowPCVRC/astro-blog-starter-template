@@ -1,158 +1,287 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { LINKS, TWITCH_CHANNEL } from "../consts";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, LINKS, TWITCH_CHANNEL } from "../consts";
 ---
 
-<BaseLayout title="Home">
-  <main class="home-shell">
-    <section class="home-main">
-      <header class="home-hero neon-card proximity-glow">
-        <div class="glow-spot"></div>
-        <h1 class="home-title">RainbowVis</h1>
-        <p class="home-subtitle">Gallery • Products • Commissions • Community</p>
-      </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
 
-      <section class="neon-grid">
-        <a class="neon-card proximity-glow" href="/gallery">
+  <body>
+    <Header />
+
+    <main class="home-shell">
+      <!-- LEFT COLUMN -->
+      <section class="home-main">
+        <!-- HERO / INTRO -->
+        <div class="neon-card proximity-glow hero-card">
           <div class="glow-spot"></div>
-          <div class="card-title-row">
-            <span class="card-ico"><img class="icon-img" src="/icons/gallery.svg" alt="" /></span>
-            <h2>Gallery</h2>
+
+          <div class="hero-top">
+            <img
+              class="hero-logo"
+              src="/RainbowsCreationsIcon.svg"
+              alt="Rainbow's Creations Icon"
+              width="44"
+              height="44"
+              loading="eager"
+            />
+            <div>
+              <h1 class="hero-title">Rainbow’s Creations</h1>
+              <p class="hero-subtitle">
+                Products, artwork, VRChat, Terraria mods, and commissions — all in one place.
+              </p>
+            </div>
           </div>
-          <p>Artwork, mods, showcases, and featured pieces.</p>
-        </a>
-
-        <a class="neon-card proximity-glow" href="/commissions">
-          <div class="glow-spot"></div>
-          <div class="card-title-row">
-            <span class="card-ico"><img class="icon-img" src="/icons/form.svg" alt="" /></span>
-            <h2>Commissions</h2>
-          </div>
-          <p>Request custom work (form + info).</p>
-        </a>
-
-        <a class="neon-card proximity-glow" href={LINKS.gumroad} target="_blank" rel="noreferrer">
-          <div class="glow-spot"></div>
-          <div class="card-title-row">
-            <span class="card-ico"><img class="icon-img" src="/icons/gumroad.svg" alt="" /></span>
-            <h2>Gumroad</h2>
-          </div>
-          <p>Digital products & downloads.</p>
-        </a>
-
-        <a class="neon-card proximity-glow" href={LINKS.jinxxy} target="_blank" rel="noreferrer">
-          <div class="glow-spot"></div>
-          <div class="card-title-row">
-            <span class="card-ico"><img class="icon-img" src="/icons/jinxxy.svg" alt="" /></span>
-            <h2>Jinxxy</h2>
-          </div>
-          <p>VRChat-related items & listings.</p>
-        </a>
-
-        <a class="neon-card proximity-glow" href={LINKS.kofi} target="_blank" rel="noreferrer">
-          <div class="glow-spot"></div>
-          <div class="card-title-row">
-            <span class="card-ico"><img class="icon-img" src="/icons/kofi.svg" alt="" /></span>
-            <h2>Ko-fi</h2>
-          </div>
-          <p>Support me + extras.</p>
-        </a>
-      </section>
-
-      <section class="neon-card proximity-glow" style="margin-top: 1rem;">
-        <div class="glow-spot"></div>
-        <div class="card-title-row">
-          <span class="card-ico"><img class="icon-img" src="/icons/social.svg" alt="" /></span>
-          <h2>Socials</h2>
-        </div>
-        <div class="social-grid">
-          <a class="chip" href={LINKS.bluesky} target="_blank" rel="noreferrer">
-            <img class="icon-img" src="/icons/bluesky.svg" alt="" /> Bluesky
-          </a>
-          <a class="chip" href={LINKS.twitter} target="_blank" rel="noreferrer">
-            <img class="icon-img" src="/icons/twitter.svg" alt="" /> Twitter / X
-          </a>
-          <a class="chip" href={LINKS.youtube} target="_blank" rel="noreferrer">
-            <img class="icon-img" src="/icons/youtube.svg" alt="" /> YouTube
-          </a>
-          <a class="chip" href={LINKS.twitch} target="_blank" rel="noreferrer">
-            <img class="icon-img" src="/icons/twitch.svg" alt="" /> Twitch
-          </a>
-          <a class="chip" href={LINKS.discordInvite} target="_blank" rel="noreferrer">
-            <img class="icon-img" src="/icons/discord.svg" alt="" /> Discord Invite
-          </a>
-        </div>
-      </section>
-    </section>
-
-    <aside class="home-side">
-      <div class="neon-card proximity-glow">
-        <div class="glow-spot"></div>
-        <h2 style="margin:0;">RainbowVis's Discord Community</h2>
-        <p style="opacity:.9; margin:.5rem 0 .75rem;">Join The Skittle Bag (+18) Discord Community!</p>
-
-        <div class="discord-frame-wrap">
-          <iframe
-            src="https://discord.com/widget?id=1318693081574543380&theme=dark"
-            width="350"
-            height="500"
-            allowtransparency="true"
-            frameborder="0"
-            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-            loading="lazy"
-            title="RainbowVis Discord Widget"
-          ></iframe>
-        </div>
-      </div>
-
-      <!-- NEW: Twitch embed under Discord widget -->
-      <div class="neon-card proximity-glow" style="margin-top: 1rem;">
-        <div class="glow-spot"></div>
-        <div class="card-title-row">
-          <span class="card-ico"><img class="icon-img" src="/icons/twitch.svg" alt="" /></span>
-          <h2 style="margin:0;">Twitch Livestream</h2>
-        </div>
-        <p style="opacity:.9; margin:.5rem 0 .75rem;">Shows live when I’m streaming.</p>
-
-        <div class="discord-frame-wrap">
-          <iframe
-            id="twitchPlayer"
-            width="100%"
-            height="220"
-            frameborder="0"
-            allowfullscreen="true"
-            scrolling="no"
-            title="Twitch player"
-          ></iframe>
         </div>
 
-        <script is:inline>
-          (() => {
-            if (typeof window === "undefined") return;
-        
-            const channel = "{TWITCH_CHANNEL}";
-            const parent = window.location.hostname;
-            const src = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&muted=true`;
-        
-            const el = document.getElementById("twitchPlayer");
-            if (el) el.src = src;
-          })();
-        </script>
-      </div>
-    </aside>
-  </main>
+        <!-- GRID OF MAIN CARDS -->
+        <div class="home-grid">
+          <!-- GALLERY -->
+          <a class="neon-card proximity-glow home-card" href="/gallery">
+            <div class="glow-spot"></div>
+            <div class="card-top">
+              <img class="card-icon-img" src="/icons/gallery.svg" alt="" aria-hidden="true" />
+              <h2 class="card-title">Gallery</h2>
+            </div>
+            <p class="card-desc">Artwork, renders, textures, icons, and showcase posts.</p>
+            <div class="card-cta">
+              <span>Open gallery</span><span class="arrow">→</span>
+            </div>
+          </a>
 
-  <style>
-    .card-title-row{ display:flex; align-items:center; gap:.6rem; }
-    .card-title-row h2{ margin:0; }
-    .card-ico{
-      display:inline-flex;
-      width: 34px; height: 34px;
-      align-items:center; justify-content:center;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      flex: 0 0 auto;
-    }
-  </style>
-</BaseLayout>
+          <!-- PRODUCTS -->
+          <a class="neon-card proximity-glow home-card" href="/products">
+            <div class="glow-spot"></div>
+            <div class="card-top">
+              <img class="card-icon-img" src="/icons/gumroad.svg" alt="" aria-hidden="true" />
+              <h2 class="card-title">Products</h2>
+            </div>
+            <p class="card-desc">Stores, featured items, and support options.</p>
+            <div class="card-cta">
+              <span>View products</span><span class="arrow">→</span>
+            </div>
+          </a>
+
+          <!-- COMMISSIONS -->
+          <a class="neon-card proximity-glow home-card" href="/commissions">
+            <div class="glow-spot"></div>
+            <div class="card-top">
+              <img class="card-icon-img" src="/icons/form.svg" alt="" aria-hidden="true" />
+              <h2 class="card-title">Commissions</h2>
+            </div>
+            <p class="card-desc">Request a commission + review terms and requirements.</p>
+            <div class="card-cta">
+              <span>Open form</span><span class="arrow">→</span>
+            </div>
+          </a>
+
+          <!-- W.I.P’s -->
+          <a class="neon-card proximity-glow home-card" href="/wips">
+            <div class="glow-spot"></div>
+            <div class="card-top">
+              <img class="card-icon-img" src="/icons/social.svg" alt="" aria-hidden="true" />
+              <h2 class="card-title">W.I.P’s</h2>
+            </div>
+            <p class="card-desc">Upcoming updates, experiments, and unfinished projects.</p>
+            <div class="card-cta">
+              <span>See what’s next</span><span class="arrow">→</span>
+            </div>
+          </a>
+
+          <!-- SOCIALS (icon-only row) -->
+          <div class="neon-card proximity-glow home-card socials-card">
+            <div class="glow-spot"></div>
+            <div class="card-top">
+              <img class="card-icon-img" src="/icons/social.svg" alt="" aria-hidden="true" />
+              <h2 class="card-title">Socials</h2>
+            </div>
+
+            <div class="social-icons">
+              <a class="social-ico" href={LINKS.bluesky} target="_blank" rel="noreferrer" aria-label="Bluesky">
+                <img src="/icons/bluesky.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.twitter} target="_blank" rel="noreferrer" aria-label="Twitter/X">
+                <img src="/icons/twitter.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
+                <img src="/icons/youtube.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.twitch} target="_blank" rel="noreferrer" aria-label="Twitch">
+                <img src="/icons/twitch.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.discord} target="_blank" rel="noreferrer" aria-label="Discord">
+                <img src="/icons/discord.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.kofi} target="_blank" rel="noreferrer" aria-label="Ko-fi">
+                <img src="/icons/kofi.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.gumroad} target="_blank" rel="noreferrer" aria-label="Gumroad">
+                <img src="/icons/gumroad.svg" alt="" />
+              </a>
+              <a class="social-ico" href={LINKS.jinxxy} target="_blank" rel="noreferrer" aria-label="Jinxxy">
+                <img src="/icons/jinxxy.svg" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>    
+
+      <!-- RIGHT COLUMN -->
+      <aside class="home-side">
+        <!-- DISCORD WIDGET -->
+        <div class="neon-card proximity-glow discord-card">
+          <div class="glow-spot"></div>
+
+          <div class="card-top">
+            <img class="card-icon-img" src="/icons/discord.svg" alt="" aria-hidden="true" />
+            <h2 class="card-title">RainbowVis’s Discord Community</h2>
+          </div>
+          <p class="card-desc">Join The Skittle Bag (+18) Discord Community!</p>
+
+          <div class="discord-frame-wrap">
+            <iframe
+              src="https://discord.com/widget?id=1318693081574543380&theme=dark"
+              width="350"
+              height="500"
+              allowtransparency="true"
+              frameborder="0"
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              loading="lazy"
+              title="RainbowVis Discord Widget"
+            ></iframe>
+          </div>
+        </div>
+
+        <!-- TWITCH EMBED (fills empty spot under discord) -->
+        <div class="neon-card proximity-glow twitch-card">
+          <div class="glow-spot"></div>
+
+          <div class="card-top">
+            <img class="card-icon-img" src="/icons/twitch.svg" alt="" aria-hidden="true" />
+            <h2 class="card-title">Live on Twitch</h2>
+          </div>
+          <p class="card-desc">Shows my stream when I’m live.</p>
+
+          <div class="twitch-frame-wrap">
+            <iframe
+              id="twitchPlayer"
+              data-channel={TWITCH_CHANNEL}
+              src=""
+              height="220"
+              width="100%"
+              allowfullscreen
+              loading="lazy"
+              title="Twitch Player"
+            ></iframe>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <Footer />
+
+    <!-- Twitch: set iframe src on the client only (Cloudflare-safe) -->
+    <script is:inline>
+      (() => {
+        if (typeof window === "undefined") return;
+        const iframe = document.getElementById("twitchPlayer");
+        if (!iframe) return;
+
+        const channel = iframe.getAttribute("data-channel") || "";
+        const parent = window.location.hostname;
+
+        if (!channel || !parent) return;
+
+        const src = `https://player.twitch.tv/?channel=${encodeURIComponent(channel)}&parent=${encodeURIComponent(parent)}&muted=true`;
+        iframe.setAttribute("src", src);
+      })();
+    </script>
+
+    <!-- Proximity glow -->
+    <script src="/proximityGlow.js" defer></script>
+
+    <style>
+      /* These are tiny layout helpers in case your global.css doesn't define them yet.
+         If your global.css already styles these, you can remove this block safely. */
+
+      .home-shell {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 18px;
+        align-items: start;
+        padding: 18px;
+      }
+      .home-main { display: grid; gap: 18px; }
+      .home-side { display: grid; gap: 18px; }
+
+      .home-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .hero-top { display: flex; gap: 14px; align-items: center; }
+      .hero-logo { border-radius: 12px; }
+      .hero-title { margin: 0; }
+      .hero-subtitle { margin: 6px 0 0 0; opacity: .9; }
+
+      .card-top { display: flex; gap: 10px; align-items: center; }
+      .card-icon-img { width: 22px; height: 22px; }
+      .card-title { margin: 0; }
+      .card-desc { margin: 10px 0 0 0; opacity: .92; }
+      .card-cta { margin-top: 12px; display:flex; gap: 10px; align-items:center; opacity:.95; }
+      .arrow { opacity: .9; }
+
+      .social-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .social-ico {
+        width: 40px; height: 40px;
+        display: grid; place-items: center;
+        border-radius: 12px;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.10);
+      }
+      .social-ico img { width: 20px; height: 20px; }
+
+      .discord-frame-wrap, .twitch-frame-wrap {
+        margin-top: 12px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(0,0,0,.25);
+      }
+
+      .about-section { padding: 18px; }
+      .about-wrap {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 16px;
+        align-items: center;
+      }
+      .about-image {
+        width: 140px; height: 140px;
+        border-radius: 18px;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+      }
+
+      @media (max-width: 980px) {
+        .home-shell { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 720px) {
+        .home-grid { grid-template-columns: 1fr; }
+        .about-wrap { grid-template-columns: 1fr; }
+        .about-image { margin: 0 auto; }
+      }
+    </style>
+  </body>
+</html>
