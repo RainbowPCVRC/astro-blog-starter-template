@@ -2,41 +2,38 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Request Sent!" description="Your commission request has been sent.">
+<BaseLayout title="Request Submitted!" description="Your request has been submitted to RainbowVis.">
   <section class="container">
-    <div class="neon-card proximity-glow" style="padding: 18px;">
+    <div class="neon-card proximity-glow" style="padding: 18px; text-align: center;">
       <div class="glow-spot"></div>
 
-      <h1 style="margin: 0 0 10px 0;">✅ Request sent!</h1>
-      <p style="margin: 0; opacity: .92;">
-        Thanks! Your commission request was submitted successfully.
-      </p>
+      <div style="display: grid; grid-template-columns: 140px 1fr; gap: 16px; align-items: center;">
+        <img
+          src="/images/rainbow-sona.png"
+          alt="RainbowVis sona"
+          width="120"
+          height="120"
+          style="border-radius: 18px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.06); margin: 0 auto;"
+          loading="lazy"
+        />
 
-      <p style="margin: 14px 0 0 0; opacity: .9;">
-        Returning you back automatically…
-      </p>
-
-      <p style="margin: 12px 0 0 0;">
-        <a class="neon-link" href="/commissions">Go back to Commissions</a>
-      </p>
+        <div>
+          <h1 style="margin: 0 0 10px 0;">Your request has been submitted!</h1>
+          <p style="margin: 0; opacity: .92;">
+            You have submitted your request to RainbowVis! They will contact you about your commission in 1-3 days!
+            You may leave this page now if the site doesn't already do so automatically.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Client-only redirect back (SSR safe) -->
   <script is:inline>
     (() => {
       if (typeof window === "undefined") return;
-
-      // Give the user a moment to read the success message.
       setTimeout(() => {
-        // If there is a previous page in history, go back.
-        if (window.history.length > 1) {
-          window.history.back();
-          return;
-        }
-        // Fallback if they landed here directly:
         window.location.href = "/commissions";
-      }, 2500);
+      }, 3500);
     })();
   </script>
 </BaseLayout>
