@@ -1,37 +1,102 @@
 import type { APIRoute } from "astro";
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
-    const contentType = request.headers.get("content-type") || "";
-
-    // We expect multipart/form-data because you want file uploads.
-    if (!contentType.includes("multipart/form-data")) {
-      return new Response("Bad Request: expected multipart form data", { status: 400 });
-    }
-
     const form = await request.formData();
 
-    // Example fields (adjust these to your form's actual names)
-    const name = String(form.get("name") || "");
-    const email = String(form.get("email") || "");
-    const commissionType = String(form.get("commissionType") || "");
-    const details = String(form.get("details") || "");
+    const name = String(form.get("name") || "").trim();
+    const replyTo = String(form.get("reply_to") || "").trim();
+    const commissionType = String(form.get("commission_type") || "").trim();
+    const details = String(form.get("details") || "").trim();
+    const next = String(form.get("next") || "/commissions").trim() || "/commissions";
 
-    // Files (if you have <input type="file" name="attachments" multiple>)
-    const files = form.getAll("attachments").filter(Boolean) as File[];
+    // Files (input name="files" multiple)
+    const files = form
+      .getAll("files")
+      .filter((x): x is File => x instanceof File && x.size > 0);
 
-    // TODO: Your email sending logic goes here.
-    // If your existing code uses an email API, keep it and include fields + files.
-    // NOTE: "mailto:" cannot send attachments; you need an email service (MailChannels, Resend, etc.)
-    // For now, we just accept the form and redirect.
+    if (!name || !replyTo || !commissionType || !details) {
+      return new Response("Missing required fields.", { status: 400 });
+    }
 
-    // Redirect to your styled success screen
-    return new Response(null, {
-      status: 303,
-      headers: {
-        Location: "/commissions/success",
-      },
+    // Cloudflare runtime env (Astro Cloudflare adapter)
+    const env = (locals as any)?.runtime?.env as any;
+    const r2: R2Bucket | undefined = env?.R2_UPLOADS;
+
+    const origin = new URL(request.url).origin;
+
+    // Upload to R2 (optional)
+    const uploaded: { key: string; name: string; size: number; type: string }[] = [];
+    if (r2) {
+      for (const f of files) {
+        // 10MB limit each
+        if (f.size > 10 * 1024 * 1024) continue;
+
+        const safeName = f.name.replace(/[^\w.\-() ]+/g, "_");
+        const key = `commission_uploads/${Date.now()}_${crypto.randomUUID()}_${safeName}`;
+
+        await r2.put(key, await f.arrayBuffer(), {
+          httpMetadata: { contentType: f.type || "application/octet-stream" },
+        });
+
+        uploaded.push({ key, name: f.name, size: f.size, type: f.type || "unknown" });
+      }
+    }
+
+    // Build email body
+    const lines: string[] = [];
+    lines.push(`New commission request for RainbowVis`);
+    lines.push(``);
+    lines.push(`Name/Handle: ${name}`);
+    lines.push(`Reply-To: ${replyTo}`);
+    lines.push(`Commission Type: ${commissionType}`);
+    lines.push(``);
+    lines.push(`Details:`);
+    lines.push(details);
+    lines.push(``);
+    lines.push(`Uploads:`);
+    if (!r2) {
+      lines.push(`- (R2 not configured — uploads not stored)`);
+    } else if (uploaded.length === 0) {
+      lines.push(`- None`);
+    } else {
+      for (const u of uploaded) {
+        // If you also have /api/download, link to it here:
+        const link = `${origin}/api/download?key=${encodeURIComponent(u.key)}`;
+        lines.push(`- ${u.name} (${Math.round(u.size / 1024)} KB)`);
+        lines.push(`  ${link}`);
+      }
+    }
+
+    // Send email via MailChannels
+    const emailPayload = {
+      personalizations: [
+        {
+          to: [{ email: "rainbowvis.co@gmail.com", name: "RainbowVis" }],
+          reply_to: { email: replyTo, name },
+        },
+      ],
+      from: { email: "commissions@rainbowvis.space", name: "RainbowVis Site" },
+      subject: `Commission Request: ${commissionType} — ${name}`,
+      content: [{ type: "text/plain", value: lines.join("\n") }],
+    };
+
+    const resp = await fetch("https://api.mailchannels.net/tx/v1/send", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(emailPayload),
     });
+
+    if (!resp.ok) {
+      const errText = await resp.text();
+      return new Response(`Email failed: ${errText}`, { status: 502 });
+    }
+
+    // Redirect to success page, which will auto-return back to next page
+    return Response.redirect(
+      `${origin}/commissions/success?next=${encodeURIComponent(next)}`,
+      303
+    );
   } catch (err) {
     console.error(err);
     return new Response("Server error submitting commission request.", { status: 500 });
