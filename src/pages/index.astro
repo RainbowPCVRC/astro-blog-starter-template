@@ -126,13 +126,17 @@ import { LINKS, TWITCH_CHANNEL } from "../consts";
           ></iframe>
         </div>
 
-        <script>
-          const host = window.location.hostname;
-          const parent = encodeURIComponent(host);
-          const channel = {JSON.stringify(TWITCH_CHANNEL)};
-          const src = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&muted=true`;
-          const el = document.getElementById("twitchPlayer");
-          if (el) el.src = src;
+        <script is:inline>
+          (() => {
+            if (typeof window === "undefined") return;
+        
+            const channel = "{TWITCH_CHANNEL}";
+            const parent = window.location.hostname;
+            const src = `https://player.twitch.tv/?channel=${channel}&parent=${parent}&muted=true`;
+        
+            const el = document.getElementById("twitchPlayer");
+            if (el) el.src = src;
+          })();
         </script>
       </div>
     </aside>
