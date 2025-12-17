@@ -1,24 +1,42 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const next = Astro.url.searchParams.get("next") || "/commissions";
 ---
 
-<BaseLayout title="Sent!" description="Commission request sent successfully.">
-  <main class="page-shell">
-    <section class="neon-card proximity-glow" style="margin-top: 1rem;">
+<BaseLayout title="Request Sent!" description="Your commission request has been sent.">
+  <section class="container">
+    <div class="neon-card proximity-glow" style="padding: 18px;">
       <div class="glow-spot"></div>
-      <h1 style="margin-top:0;">Request Sent ✅</h1>
-      <p style="opacity:.9;">Thanks! Your commission request was sent.</p>
-      <p style="opacity:.85;">Redirecting you back in a moment…</p>
 
-      <p style="margin-top:1rem;">
-        <a class="underline-soft" href={next}>Go back now →</a>
+      <h1 style="margin: 0 0 10px 0;">✅ Request sent!</h1>
+      <p style="margin: 0; opacity: .92;">
+        Thanks! Your commission request was submitted successfully.
       </p>
-    </section>
-  </main>
 
-  <script>
-    const next = {JSON.stringify(next)};
-    setTimeout(() => { window.location.href = next; }, 2200);
+      <p style="margin: 14px 0 0 0; opacity: .9;">
+        Returning you back automatically…
+      </p>
+
+      <p style="margin: 12px 0 0 0;">
+        <a class="neon-link" href="/commissions">Go back to Commissions</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Client-only redirect back (SSR safe) -->
+  <script is:inline>
+    (() => {
+      if (typeof window === "undefined") return;
+
+      // Give the user a moment to read the success message.
+      setTimeout(() => {
+        // If there is a previous page in history, go back.
+        if (window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+        // Fallback if they landed here directly:
+        window.location.href = "/commissions";
+      }, 2500);
+    })();
   </script>
 </BaseLayout>
