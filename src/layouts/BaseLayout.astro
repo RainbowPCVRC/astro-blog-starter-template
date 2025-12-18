@@ -3,22 +3,30 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-const { title, description } = Astro.props;
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description = "", image } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title ?? "Rainbow's Creations"} description={description ?? "Where everything RainbowVis is!"} />
+    <BaseHead title={title} description={description} image={image} />
   </head>
 
   <body>
     <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
 
-    <script src="/proximityGlow.js" defer></script>
+    <main class="site-main">
+      <div class="page">
+        <slot />
+      </div>
+    </main>
+
+    <Footer />
   </body>
 </html>
