@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_UPDATES } from "../consts";
+---
+
+<BaseLayout title="Updates" description="Website updates and change log.">
+  <section class="container">
+    <div class="neon-card proximity-glow" style="padding: 1.25rem;">
+      <h1 style="margin:0;">Updates</h1>
+      <p style="margin:.35rem 0 0; opacity:.9;">
+        Site update tracker + changelog.
+      </p>
+    </div>
+
+    <div class="neon-grid" style="margin-top: 1rem;">
+      {SITE_UPDATES.map((u) => (
+        <article class="neon-card proximity-glow" style="padding: 1.1rem;">
+          <div style="display:flex; gap:.75rem; align-items:baseline; flex-wrap:wrap;">
+            <h2 style="margin:0;">{u.version}</h2>
+            <span style="opacity:.75;">{u.date}</span>
+          </div>
+          <p style="margin:.35rem 0 .75rem; opacity:.9;">{u.title}</p>
+          <ul style="margin:0; padding-left: 1.1rem; opacity:.9;">
+            {u.notes.map((n) => <li>{n}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
