@@ -2,6 +2,20 @@ export const SITE_TITLE = "Rainbow's Creations";
 export const SITE_DESCRIPTION =
   "Products, Artwork, VRChat assets, Terraria mods, and Commissions — all in one place!";
 
+export const LINKS = {
+  bluesky: "https://bsky.app/profile/rainbowvis.bsky.social",
+  twitter: "https://x.com/Rainbow_Vis",
+  youtube: "https://www.youtube.com/@RainbowVis",
+  twitch: "https://www.twitch.tv/rainbow_vis",
+  discordInvite: "https://discord.com/invite/xYczE7TSMv",
+  gumroad: "https://rainbowscreations.gumroad.com/",
+  jinxxy: "https://jinxxy.com/rainbowvis",
+  kofi: "https://ko-fi.com/rainbow_vis",
+};
+
+export const TWITCH_CHANNEL = "rainbow_vis";
+
+/** Top nav */
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
@@ -13,11 +27,7 @@ export const NAV_LINKS = [
   { href: "/contact", label: "Contacts" },
 ];
 
-/**
- * Simple versioning idea:
- * - v0.x while you're building the site
- * - bump minor when you add a new page/feature
- */
+/** Update tracker */
 export const SITE_UPDATES = [
   {
     version: "v0.4.0",
