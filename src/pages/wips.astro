@@ -1,149 +1,79 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-const wips = [
-  { title: "Terraria Mod Updates", tag: "Mods", desc: "Upcoming items, vanity sets, and effects." },
-  { title: "VRChat Retexture Experiments", tag: "VRChat", desc: "New variants & shader tests." },
-  { title: "Website + Branding", tag: "Site", desc: "New layouts, icons, and polish passes." },
-  { title: "Audio / FNF", tag: "Audio", desc: "Chromatics, SFX, and new mixes." },
-];
 ---
 
-<BaseLayout
-  title="W.I.P’s — Rainbow’s Creations"
-  description="Work in progress projects and upcoming updates."
->
-  <section class="home-shell">
-    <div class="neon-card" style="padding: 22px;">
-      <h1 style="margin:0 0 6px 0;">W.I.P’s</h1>
-      <p style="margin:0; opacity:.9;">Work in progress projects and upcoming updates.</p>
-    </div>
+<BaseLayout title="W.I.P's" description="Work in progress projects and upcoming updates.">
+  <main class="page-shell">
+    <section class="neon-card">
+      <h1 class="neon-title">W.I.P's</h1>
+      <p class="neon-subtitle">Work in progress projects and upcoming updates.</p>
+    </section>
 
-    <div class="neon-grid" style="margin-top: 18px;">
-      {wips.map((it) => (
-        <a href="#" class="neon-card empty-card" data-empty="true" aria-label={`${it.title} (empty)`}>
-          <div class="card-head">
-            <span class="pill">{it.tag}</span>
-          </div>
-          <h2 class="card-title">{it.title}</h2>
-          <p class="card-desc">{it.desc}</p>
-        </a>
-      ))}
-    </div>
-  </section>
+    <section class="neon-grid" aria-label="WIP categories">
+      <a class="neon-card" href="#" data-empty>
+        <span class="tag">Mods</span>
+        <h2>Terraria Mod Updates</h2>
+        <p class="neon-subtitle">Upcoming items, vanity sets, and effects.</p>
+      </a>
 
-  {/* Empty-state modal */}
-  <div id="emptyModal" class="empty-modal" aria-hidden="true">
-    <div class="empty-backdrop" data-close="true"></div>
+      <a class="neon-card" href="#" data-empty>
+        <span class="tag">VRChat</span>
+        <h2>VRChat Retexture Experiments</h2>
+        <p class="neon-subtitle">New variants & shader tests.</p>
+      </a>
 
-    <div class="empty-dialog neon-card" role="dialog" aria-modal="true" aria-label="Empty content">
-      <button class="empty-close neon-card" type="button" aria-label="Close" data-close="true">✕</button>
+      <a class="neon-card" href="#" data-empty>
+        <span class="tag">Site</span>
+        <h2>Website + Branding</h2>
+        <p class="neon-subtitle">New layouts, icons, and polish passes.</p>
+      </a>
 
-      <div class="empty-content">
-        <img
-          class="empty-image"
-          src="/images/rainbow-sona.png"
-          alt="RainbowVis sona"
-          loading="lazy"
-        />
-        <div class="empty-text">
-          <div class="empty-title">There is nothing here yet!</div>
-          <div class="empty-subtitle">Wait until a site update comes out!</div>
+      <a class="neon-card" href="#" data-empty>
+        <span class="tag">Audio</span>
+        <h2>Audio / FNF</h2>
+        <p class="neon-subtitle">Chromatics, SFX, and new mixes.</p>
+      </a>
+    </section>
+  </main>
+
+  <!-- Empty modal -->
+  <div class="modal-backdrop" id="emptyModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="emptyTitle">
+      <div class="modal-row">
+        <img class="modal-sona" src="/images/rainbow-sona.png" alt="RainbowVis sona" />
+        <div class="modal-text">
+          <h2 id="emptyTitle">There is nothing here yet! Wait until a site update comes out!</h2>
+          <p>These pages will be filled over time as new updates get published.</p>
         </div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn" type="button" id="closeEmptyModal">Close</button>
       </div>
     </div>
   </div>
 
-  <style>
-    .empty-card { cursor: pointer; text-decoration: none; display: block; }
-    .card-head { display:flex; justify-content:flex-start; margin-bottom: 10px; }
-    .pill {
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 6px 10px; border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      font-size: 12px; opacity: .95;
-    }
-    .card-title { margin: 8px 0 8px 0; }
-    .card-desc { margin: 0; opacity: .9; }
-
-    :global(body.modal-open) { overflow: hidden; }
-    .empty-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
-    .empty-modal.is-open { display: block; }
-    .empty-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.65); }
-    .empty-dialog {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      width: min(860px, calc(100vw - 28px));
-      padding: 22px;
-    }
-    .empty-close {
-      position: absolute;
-      right: 14px; top: 14px;
-      width: 44px; height: 44px;
-      display: grid; place-items: center;
-      padding: 0;
-      background: rgba(0,0,0,.22);
-      border-radius: 12px;
-      cursor: pointer;
-      border: none;
-    }
-    .empty-content {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 18px;
-      align-items: center;
-    }
-    .empty-image {
-      width: 140px; height: 140px;
-      border-radius: 18px;
-      object-fit: cover;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    .empty-text { text-align: center; }
-    .empty-title { font-size: 24px; font-weight: 800; }
-    .empty-subtitle { margin-top: 6px; font-size: 16px; opacity: .92; }
-
-    @media (max-width: 560px) {
-      .empty-content { grid-template-columns: 1fr; }
-      .empty-image { margin: 0 auto; }
-    }
-  </style>
-
-  <script is:inline>
+  <script>
     const modal = document.getElementById("emptyModal");
-    const open = () => {
-      modal.classList.add("is-open");
+    const closeBtn = document.getElementById("closeEmptyModal");
+    const openers = document.querySelectorAll("[data-empty]");
+
+    function openModal(e) {
+      e.preventDefault();
+      modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
-    };
-    const close = () => {
-      modal.classList.remove("is-open");
+    }
+    function closeModal() {
+      modal.classList.remove("show");
       modal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("modal-open");
-    };
+    }
 
-    document.addEventListener("click", (e) => {
-      const t = e.target;
-
-      const card = t.closest?.(".empty-card[data-empty='true']");
-      if (card) {
-        e.preventDefault();
-        open();
-        return;
-      }
-
-      const closer = t.closest?.("[data-close='true']");
-      if (closer) {
-        e.preventDefault();
-        close();
-      }
+    openers.forEach((el) => el.addEventListener("click", openModal));
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
     });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
     });
   </script>
 </BaseLayout>
